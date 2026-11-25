@@ -4,7 +4,16 @@
 //   even if they come back later to apply.
 // - Each link open is counted once per browser session.
 
-const env = import.meta.env
+// Only the settings this file needs. Never take import.meta.env whole: on Vercel that would ship
+// every build variable (commit messages, repo names) inside the public page code.
+const env = {
+  VITE_FORM_ENDPOINT: import.meta.env.VITE_FORM_ENDPOINT as string | undefined,
+  VITE_MULTI_PAGE: import.meta.env.VITE_MULTI_PAGE as string | undefined,
+  VITE_PRIVACY_URL: import.meta.env.VITE_PRIVACY_URL as string | undefined,
+  VITE_SITE_URL: import.meta.env.VITE_SITE_URL as string | undefined,
+  VITE_SUBMISSION_MODE: import.meta.env.VITE_SUBMISSION_MODE as string | undefined,
+  VITE_TERMS_URL: import.meta.env.VITE_TERMS_URL as string | undefined,
+}
 const ENDPOINT = env.VITE_SUBMISSION_MODE === 'endpoint' ? (env.VITE_FORM_ENDPOINT as string | undefined) : undefined
 const SITE = (env.VITE_SITE_URL as string | undefined)?.replace(/\/+$/, '')
 const REF_KEY = 'ck_ref'
