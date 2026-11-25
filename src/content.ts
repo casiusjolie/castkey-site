@@ -52,7 +52,7 @@ export const whyBrands = {
     { k: 'Fully covered', v: 'Every license spells out where the ads run and for how long.' },
   ],
   compare: { a: 'Filming 20 creator videos', av: 'about $3,000', b: 'One Castkey license', bv: 'from $100 a month', src: 'Collabstr 2026 report', url: 'https://collabstr.com/2026-influencer-marketing-report' },
-  cta: 'Brands: request a demo',
+  cta: 'Brands: request an intro',
 }
 
 export const how = {
@@ -177,5 +177,5 @@ export const calls = {
 export const closing = {
   title: 'Your face. Your terms.',
   creator: { k: 'For creators', v: 'Join the waitlist. Tell us what you would license and where your lines are.' },
-  brand: { k: 'For brands and agencies', v: 'Request a demo. Tell us what you want to make and who you need.' },
+  brand: { k: 'For brands and agencies', v: 'Request an intro. Tell us what you want to make and who you need.' },
 }

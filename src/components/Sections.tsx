@@ -59,7 +59,7 @@ export function Closing() {
             <button type="button" className="btn-dark press px-8 text-base" onClick={() => open('creator')}>Apply to list your likeness</button>
             <InviteSomeone tone="light" />
           </div>
-          <button type="button" className="press inline-flex min-h-[44px] items-center text-sm underline underline-offset-4" onClick={() => open('brand')}>Brands and agencies: request a demo</button>
+          <button type="button" className="press inline-flex min-h-[44px] items-center text-sm underline underline-offset-4" onClick={() => open('brand')}>Brands and agencies: request an intro</button>
         </div>
       </div>
     </section>

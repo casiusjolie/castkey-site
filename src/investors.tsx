@@ -153,7 +153,7 @@ function Portal() {
             <Tile accent label="Creator applicants" value={String(data.creators.total)} note={`${data.creators.last7} in the last 7 days`} />
             <Tile label="Combined creator reach" value={data.creators.reach.answered ? `${range(data.creators.reach.low, data.creators.reach.high, people)}` : '—'} note={data.creators.reach.answered ? `Followers, from ${data.creators.reach.answered} creators who shared a range` : 'No follower ranges shared yet'} />
             <Tile label="Came through a creator invite" value={data.creators.total ? `${Math.round((data.creators.invited / data.creators.total) * 100)}%` : '—'} note="Applicants who used another creator’s invite link" />
-            <Tile accent label="Brand demo requests" value={String(data.brands.total)} note={`${data.brands.last7} in the last 7 days · ${data.partners.total} partner applications`} />
+            <Tile accent label="Brand intro requests" value={String(data.brands.total)} note={`${data.brands.last7} in the last 7 days · ${data.partners.total} partner applications`} />
             <Tile label="Brands’ paid ad spend" value={spendValue(data.brands.adSpend)} note={spendNote(data.brands.adSpend)} />
             <Tile label="Brands’ creator & UGC spend" value={spendValue(data.brands.creatorSpend)} note={spendNote(data.brands.creatorSpend)} />
           </div>

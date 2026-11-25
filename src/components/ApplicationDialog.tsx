@@ -130,7 +130,7 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
       return
     }
     setStatus('sending')
-    setMessage(audience === 'brand' ? 'Sending your demo request…' : 'Submitting your application…')
+    setMessage(audience === 'brand' ? 'Sending your intro request…' : 'Submitting your application…')
     const trim = <T extends Record<string, string>>(o: T) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, v.trim()])) as T
     const result =
       audience === 'brand'
@@ -140,7 +140,7 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
         : await submitter.submit({ audience: 'creator', fields: trim(creator) })
     if (result.kind === 'received') {
       setStatus('received')
-      setMessage(audience === 'brand' ? 'Demo request received.' : 'Application received.')
+      setMessage(audience === 'brand' ? 'Intro request received.' : 'Application received.')
     } else if (result.kind === 'demo') {
       setStatus('demo')
       setMessage(`Demo only: your ${audience === 'brand' ? 'request' : 'application'} was not sent.`)
@@ -153,7 +153,7 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
 
   const isPartner = audience === 'partner'
   const isBrand = audience === 'brand' || isPartner
-  const noun = isPartner ? 'partner application' : audience === 'brand' ? 'demo request' : 'application'
+  const noun = isPartner ? 'partner application' : audience === 'brand' ? 'intro request' : 'application'
   const done = status === 'demo' || status === 'received'
   const prefix = audience ?? 'brand'
 
@@ -198,7 +198,7 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
                 <>
                   <p className="text-xs font-medium text-coral">Received</p>
                   <p className="mt-2 font-display text-3xl leading-tight">Thanks. Your {noun} was received.</p>
-                  <p className="mt-3 text-sm text-sub">{isPartner ? 'We’ll be in touch to plan your roster onboarding and set up your referral link.' : isBrand ? 'We’ll be in touch to schedule a demo.' : 'We review creator applications by hand and will be in touch as onboarding opens.'}</p>
+                  <p className="mt-3 text-sm text-sub">{isPartner ? 'We’ll be in touch to plan your roster onboarding and set up your referral link.' : isBrand ? 'We’ll email you within a day to set up a quick intro call.' : 'We review creator applications by hand and will be in touch as onboarding opens.'}</p>
                 </>
               )}
               <div className="mt-8 flex flex-wrap gap-3">
@@ -296,7 +296,7 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
                       </fieldset>
                     </>
                   )}
-                  <Field id={`${prefix}-intendedUse`} label={isPartner ? 'Tell us about your roster' : 'What would you use it for?'} required error={errors.intendedUse} hint={isPartner ? 'Niches, platforms, and a link to your roster or site if you have one.' : 'A sentence or two is plenty, for example product explainers for our app. We’ll shape the demo around it.'}>
+                  <Field id={`${prefix}-intendedUse`} label={isPartner ? 'Tell us about your roster' : 'What would you use it for?'} required error={errors.intendedUse} hint={isPartner ? 'Niches, platforms, and a link to your roster or site if you have one.' : 'A sentence or two is plenty, for example product explainers for our app. We’ll use it to pick creators for you.'}>
                     {(a) => <textarea {...a} rows={3} maxLength={600} className="field resize-y" value={brand.intendedUse} onChange={(e) => setBrand({ ...brand, intendedUse: e.target.value })} />}
                   </Field>
                 </>
@@ -350,7 +350,7 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
                 <button type="submit" className="btn-primary min-w-[200px]" disabled={status === 'sending'} aria-disabled={status === 'sending'}>
                   {status === 'sending' ? (
                     <><span className="h-4 w-4 animate-spin rounded-full border-2 border-ink-950/30 border-t-ink-950" aria-hidden="true" />Submitting…</>
-                  ) : status === 'error' ? 'Try again' : isPartner ? 'Send roster details' : isBrand ? 'Request a demo' : 'Join the waitlist'}
+                  ) : status === 'error' ? 'Try again' : isPartner ? 'Send roster details' : isBrand ? 'Request an intro' : 'Join the waitlist'}
                 </button>
                 <button type="button" className="btn-ghost" onClick={() => ref.current?.close()}>Cancel</button>
               </div>

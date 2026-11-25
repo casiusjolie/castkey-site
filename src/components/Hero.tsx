@@ -15,7 +15,7 @@ export function Hero() {
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
           <button type="button" className="btn-primary press px-6" onClick={() => open('creator')}>Apply to list your likeness</button>
           <button type="button" className="link-arrow press" onClick={() => open('brand')}>
-            {hero.small}: request a demo <span aria-hidden="true">›</span>
+            {hero.small}: request an intro <span aria-hidden="true">›</span>
           </button>
         </div>
 

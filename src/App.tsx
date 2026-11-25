@@ -37,7 +37,7 @@ function Footer({ open }: { open: (a: Audience) => void }) {
             ))}
             <li><button type="button" className="hover:text-paper" onClick={() => window.dispatchEvent(new Event('ck:intro'))}>Watch the intro</button></li>
             <li><button type="button" className="hover:text-paper" onClick={() => open('partner')}>Become a partner</button></li>
-            <li><button type="button" className="hover:text-paper" onClick={() => open('brand')}>Brands: request a demo</button></li>
+            <li><button type="button" className="hover:text-paper" onClick={() => open('brand')}>Brands: request an intro</button></li>
             <li><BugReport className="hover:text-paper" /></li>
             <li>{legalLinks.privacy ? <a className="hover:text-paper" href={legalLinks.privacy}>Privacy</a> : <span className="text-mute">Privacy (pending)</span>}</li>
             <li>{legalLinks.terms ? <a className="hover:text-paper" href={legalLinks.terms}>Terms</a> : <span className="text-mute">Terms (pending)</span>}</li>

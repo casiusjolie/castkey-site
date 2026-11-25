@@ -71,6 +71,7 @@ export function Header() {
           </ul>
         </nav>
         <div className="flex flex-1 items-center justify-end gap-2">
+          <a href="/app/" className="hidden min-h-10 items-center whitespace-nowrap rounded-full px-3 text-sm font-medium text-sub transition-colors duration-300 hover:text-paper sm:inline-flex">Log in</a>
           <button type="button" className="btn-primary press hidden min-h-10 shrink-0 whitespace-nowrap text-sm sm:inline-flex" onClick={() => open('creator')}>
             Apply
           </button>
@@ -106,7 +107,8 @@ export function Header() {
           </nav>
           <div className="mt-auto grid gap-3">
             <button type="button" className="btn-primary press w-full" onClick={() => { setMenu(false); open('creator') }}>Apply</button>
-            <button type="button" className="btn-ghost press w-full" onClick={() => { setMenu(false); open('brand') }}>Request a demo</button>
+            <a href="/app/" className="btn-ghost press w-full">Log in</a>
+            <button type="button" className="btn-ghost press w-full" onClick={() => { setMenu(false); open('brand') }}>Brands: request an intro</button>
           </div>
         </div>
       )}

@@ -13,7 +13,7 @@ export function ApplyButtons({ className = '', dark = false }: { className?: str
         Apply as a creator
       </button>
       <button type="button" className={dark ? 'btn-dark' : 'btn-ghost'} onClick={() => open('brand')}>
-        Request a demo
+        Request an intro
       </button>
     </div>
   )

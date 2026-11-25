@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type CSSProperties, type Reac
 import { Mark } from './Logo'
 import { arrivedWithRef } from '../lib/referral'
 import { fastTrackKey } from '../lib/fasttrack'
+import { useApply } from '../apply'
 import casius from '../assets/casius.jpg'
 import maya from '../assets/maya.jpg'
 import jordan from '../assets/jordan.jpg'
@@ -308,7 +309,8 @@ export function Intro() {
     })
   }, [i, last, reduce])
 
-  const close = useCallback((target?: 'invite' | 'page' | 'refer') => {
+  const { open: openApply } = useApply()
+  const close = useCallback((target?: 'invite' | 'page' | 'refer' | 'brand') => {
     try { sessionStorage.setItem(SEEN, '1') } catch { /* ignore */ }
     if (target === 'invite' || target === 'refer') document.getElementById(target)?.scrollIntoView({ block: 'start' })
     else window.scrollTo(0, 0)
@@ -316,7 +318,8 @@ export function Intro() {
     setLeaving(true)
     setTimeout(() => { setOpen(false); setLeaving(false) }, 750)
     if (target === 'invite') setTimeout(() => document.querySelector<HTMLElement>('#invite input, #invite button')?.focus({ preventScroll: true }), 800)
-  }, [reduce])
+    if (target === 'brand') setTimeout(() => openApply('brand'), reduce ? 0 : 750)
+  }, [reduce, openApply])
 
   useEffect(() => {
     if (!open) return
@@ -375,11 +378,17 @@ export function Intro() {
               <button type="button" className="btn-primary press min-w-[240px]" onClick={() => close('invite')}>Apply to list your likeness</button>
               <button type="button" className="btn-ghost press min-w-[240px]" onClick={() => close('page')}>See the full page</button>
             </div>
+            <button type="button" className="iz link-arrow press mt-3" style={d(800)} onClick={() => close('brand')}>Brands and agencies: request an intro <span aria-hidden="true">›</span></button>
             <button type="button" className="iz mt-8 w-full max-w-[520px] rounded-2xl bg-coral px-5 py-4 text-left text-ink-950 press" style={d(900)} onClick={() => close('refer')}>
               <span className="block font-display text-2xl leading-tight sm:text-3xl">Refer creators and earn up to $10,000.</span>
               <span className="mt-1 block text-sm">5% of what each creator you refer earns, paid by Castkey. Get your link ›</span>
             </button>
             <button type="button" className="iz mt-5 text-sm text-mute hover:text-paper" style={d(1100)} onClick={() => go(0)}>Watch again</button>
+          </div>
+        ) : s.id === 'brands' ? (
+          <div className="flex w-full flex-col items-center">
+            {s.body()}
+            <button type="button" className="iz link-arrow press mt-6 self-start md:self-auto" style={d(1000)} onClick={() => close('brand')}>Brands: request an intro <span aria-hidden="true">›</span></button>
           </div>
         ) : s.body()}
       </div>
