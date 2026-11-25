@@ -1,6 +1,6 @@
 import { hero } from '../content'
 import { useApply } from '../apply'
-import { WorkflowArt } from './WorkflowArt'
+import { HeroWeb } from './HeroWeb'
 
 export function Hero() {
   const { open } = useApply()
@@ -20,8 +20,8 @@ export function Hero() {
         <p className="mt-6 text-sm text-mute">Free to apply · Verified profiles only · About two minutes</p>
 
         <div className="relative mx-auto mt-16 max-w-[1100px] sm:mt-20" data-reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-line">
-            <WorkflowArt />
+          <div className="relative overflow-hidden rounded-3xl border border-line bg-ink-900">
+            <HeroWeb />
           </div>
         </div>
       </div>

@@ -4,12 +4,6 @@ import { exampleListing as L } from '../content'
 // The founder's listing, shown as it would look on a phone in the Castkey app.
 // Inside the phone everything is illustrative UI: nothing in it is clickable.
 
-const POINTS = [
-  { k: 'Your rules travel with every license', v: 'What brands may do, and what they never can, is attached to each request.' },
-  { k: 'Your training pack is the product', v: 'Subscriptions include your reviewed photos, talking videos and voice notes.' },
-  { k: 'Brands request, you decide', v: 'Every request waits for your accept, adjust or decline. Only verified profiles can be licensed.' },
-]
-
 const Check = () => (
   <svg viewBox="0 0 16 16" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-ice" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
 )
@@ -166,18 +160,7 @@ export function Listing() {
         <div>
           <p className="eyebrow">Your listing</p>
           <h2 id="listing-h" className="display-2 mt-3">This is what brands see.</h2>
-          <p className="mt-4 max-w-[52ch] text-lg text-sub">{L.intro}</p>
-          <ul className="mt-8 grid gap-4">
-            {POINTS.map((p, i) => (
-              <li key={p.k} className="flex gap-4">
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-sm text-coral">{i + 1}</span>
-                <div>
-                  <p className="text-base font-medium">{p.k}</p>
-                  <p className="mt-1 text-sm text-sub">{p.v}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <p className="mt-4 max-w-[44ch] text-lg text-sub">Your photo, your rules and your price, on one page. Brands send a request; you decide.</p>
           <p className="mt-8"><span className="tag-ill">{L.badge}</span></p>
         </div>
         <Phone />

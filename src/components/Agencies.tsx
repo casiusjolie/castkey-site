@@ -16,7 +16,7 @@ export function Agencies() {
             <p className="mt-4 max-w-[46ch] text-xs text-mute">{agencies.note}</p>
           </div>
           <div>
-            <ol className="grid gap-3 sm:grid-cols-2">
+            <ol className="grid gap-3">
               {agencies.points.map((p, i) => (
                 <li key={p.k} className="rounded-3xl border border-line bg-ink-900 p-6">
                   <span className="grid h-8 w-8 place-items-center rounded-full bg-coral text-sm font-semibold text-ink-950" aria-hidden="true">{i + 1}</span>
@@ -25,7 +25,6 @@ export function Agencies() {
                 </li>
               ))}
             </ol>
-            <p className="mt-3 rounded-2xl border border-line px-5 py-4 text-sm text-sub">{agencies.example}</p>
           </div>
         </div>
       </div>

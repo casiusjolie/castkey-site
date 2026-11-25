@@ -4,12 +4,11 @@ import type { Audience } from './lib/submit'
 import { legalLinks } from './lib/submit'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { Trust, FAQ, Closing } from './components/Sections'
+import { FAQ, Closing } from './components/Sections'
 import { Invite } from './components/Invite'
 import { Listing } from './components/Listing'
-import { Why } from './components/Why'
-import { CreatorPay } from './components/CreatorPay'
-import { Ecosystem } from './components/Ecosystem'
+import { HowItWorks } from './components/HowItWorks'
+import { Earn } from './components/Earn'
 import { Agencies } from './components/Agencies'
 import { ApplicationDialog } from './components/ApplicationDialog'
 import { Wordmark } from './components/Logo'
@@ -70,13 +69,11 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
-        <Why />
+        <HowItWorks />
         <Listing />
-        <CreatorPay />
-        <Ecosystem />
+        <Earn />
         <Invite />
         <Agencies />
-        <Trust />
         <FAQ />
         <Closing />
       </main>

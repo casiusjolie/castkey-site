@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { invite } from '../content'
 import { getSubmitter, legalLinks, makeInviteCode, readInviteCode, type CreatorFields } from '../lib/submit'
-import { CodeInput, CodeStatus, InviteActions, InviteSomeone, useCodeCheck } from './InviteSomeone'
+import { CodeInput, CodeStatus, InviteActions, useCodeCheck } from './InviteSomeone'
+import { PackScreen } from './AppScreens'
 import { normCode, refLink, saveMyCode, suggestCode } from '../lib/referral'
 import { referral } from '../content'
 
@@ -245,9 +246,12 @@ export function Invite() {
           )}
         </div>
 
-        <div className="mt-10 text-center">
-          <p className="mb-3 text-sm text-sub">Not applying yourself? You can still refer creators and earn.</p>
-          <InviteSomeone label="Get a referral link" />
+        <div className="mx-auto mt-16 grid max-w-[760px] items-center gap-8 sm:grid-cols-[minmax(0,1fr)_auto]">
+          <div>
+            <h3 className="font-display text-3xl leading-tight tracking-[-0.02em]">Approved? Record your training pack.</h3>
+            <p className="mt-3 max-w-[40ch] text-sub">Photos, a few talking videos and voice notes, all in the app. It’s what brands license, so we review every piece before you go live.</p>
+          </div>
+          <PackScreen />
         </div>
       </div>
     </section>
