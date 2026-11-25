@@ -61,7 +61,7 @@ export function HeroWeb() {
   const brand = { x: 30, y: 160, w: 230, h: 120 }
   const hub = { x: 390, y: 175, w: 200, h: 90 }
   const outs = [
-    { y: 20, k: 'Creator', amount: '$800', sub: 'or $850 with Castkey Exclusive', tone: 'coral' as const, color: CORAL },
+    { y: 20, k: 'Creator', amount: '$800', sub: '80%, paid every month', tone: 'coral' as const, color: CORAL },
     { y: 165, k: 'Manager (optional)', amount: 'Up to 20%', sub: 'of the creator’s share', tone: 'plain' as const, color: PAPER },
     { y: 310, k: 'Referrer', amount: '$50', sub: '5%, paid by Castkey', tone: 'ice' as const, color: ICE },
   ]
@@ -73,7 +73,7 @@ export function HeroWeb() {
   const mb = { x: 20, y: 10, w: 320, h: 92 }
   const mh = { x: 80, y: 160, w: 200, h: 76 }
   const mo = [
-    { x: 20, y: 300, w: 320, k: 'Creator', amount: '$800', sub: 'or $850 with Castkey Exclusive', tone: 'coral' as const, color: CORAL },
+    { x: 20, y: 300, w: 320, k: 'Creator', amount: '$800', sub: '80%, paid every month', tone: 'coral' as const, color: CORAL },
     { x: 20, y: 420, w: 154, k: 'Manager', amount: '≤ 20%', sub: 'optional', tone: 'plain' as const, color: PAPER },
     { x: 186, y: 420, w: 154, k: 'Referrer', amount: '$50', sub: 'paid by Castkey', tone: 'ice' as const, color: ICE },
   ]
@@ -81,7 +81,7 @@ export function HeroWeb() {
   const mOut = (o: (typeof mo)[number]) => `M180,${mh.y + mh.h} C180,${mh.y + mh.h + 40} ${o.x + o.w / 2},${o.y - 40} ${o.x + o.w / 2},${o.y}`
 
   return (
-    <figure className="relative px-4 py-6 sm:px-8 sm:py-8" aria-label="How a Castkey deal pays out: a brand pays $1,000 a month. Castkey checks the creator's rules and splits it: the creator keeps $800, or $850 with Castkey Exclusive; an optional manager earns up to 20% of the creator's share; whoever referred the creator earns $50, paid by Castkey.">
+    <figure className="relative px-4 py-6 sm:px-8 sm:py-8" aria-label="How a Castkey deal pays out: a brand pays $1,000 a month. Castkey checks the creator's rules and splits it: the creator keeps $800; an optional manager earns up to 20% of the creator's share; whoever referred the creator earns $50, paid by Castkey.">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-left">
         <div className="flex items-center gap-3" aria-live="off">
           <span className="flex gap-1" aria-hidden="true">

@@ -35,10 +35,9 @@ export const pricing = {
   referral: 5, // % of each deal paid to whoever referred the creator, from Castkey's share
   referralCap: '$10,000',
   managerCap: 20, // max % of the creator's share a manager can take
-  plans: [
-    { id: 'standard', k: 'Standard', fee: 20, keep: 80, v: 'List on Castkey and anywhere else.' },
-    { id: 'exclusive', k: 'Castkey Exclusive', fee: 15, keep: 85, v: 'License your AI likeness only through Castkey for 12 months. Get top placement, a deals contact, and a spot in Castkey’s own ads (you approve each one).' },
-  ],
+  fee: 20, // Castkey's fee, % of each license
+  keep: 80, // the creator's share, % of each license (before any manager split)
+  minLicense: 250, // lowest monthly license price, so fixed payment costs stay small
 } as const
 
 export const how = {
@@ -130,8 +129,7 @@ export const invite = {
 }
 
 export const faq = [
-  { q: 'How do I get paid?', a: 'Brands subscribe monthly to your license. You keep 80%, or 85% with Castkey Exclusive. Payouts are automatic every month.' },
-  { q: 'What is Castkey Exclusive?', a: 'Commit your AI likeness to Castkey for 12 months and our fee drops from 20% to 15%. You get top placement, a deals contact, and Castkey can feature you in its own ads, with your approval on each. Your normal sponsored posts aren’t affected.' },
+  { q: 'How do I get paid?', a: 'Brands subscribe monthly to your license. You keep 80% of every payment, and payouts are automatic every month. Licenses start at $250 a month.' },
   { q: 'What are open calls and minimums?', a: 'Brands post open calls with what they’ll pay. Your inbound minimum is the least a brand can offer when they reach out to you. When you apply to an open call yourself, you can accept less if the deal is right.' },
   { q: 'Do I approve every brand?', a: 'Yes. You accept, counter or decline every request, and you can message the brand in the app first.' },
   { q: 'What do brands get?', a: 'Your training pack (photos, talking videos and voice recordings) plus a written license: where it runs, for how long, and your rules. Every profile needs a pack before it goes live.' },

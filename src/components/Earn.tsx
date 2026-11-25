@@ -27,13 +27,11 @@ function Toggle({ on, set, label }: { on: boolean; set: (v: boolean) => void; la
 }
 
 export function Earn() {
-  const [planId, setPlanId] = useState<'standard' | 'exclusive'>('exclusive')
   const [hasManager, setHasManager] = useState(false)
   const [split, setSplit] = useState(10)
   const [referred, setReferred] = useState(true)
-  const plan = pricing.plans.find((p) => p.id === planId)!
 
-  const creatorShare = L * (plan.keep / 100)
+  const creatorShare = L * (pricing.keep / 100)
   const manager = hasManager ? creatorShare * (split / 100) : 0
   const creator = creatorShare - manager
   const referrer = referred ? L * (pricing.referral / 100) : 0
@@ -55,18 +53,13 @@ export function Earn() {
 
           <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-16">
             <div className="lit rounded-3xl p-4 sm:p-8" data-spot>
-              {/* Plans */}
-              <div className="grid gap-2 sm:grid-cols-2" role="radiogroup" aria-label="Plan">
-                {pricing.plans.map((p) => (
-                  <button key={p.id} type="button" role="radio" aria-checked={planId === p.id} onClick={() => setPlanId(p.id)}
-                    className={`press rounded-2xl border p-4 text-left transition-colors duration-300 ${planId === p.id ? 'border-coral bg-coral/10 shadow-[0_0_40px_-12px_rgba(232,119,79,0.6)]' : 'border-line hover:border-paper/40'}`}>
-                    <span className="flex items-baseline justify-between gap-3">
-                      <span className="font-semibold">{p.k}</span>
-                      <span className="font-display text-2xl">{p.keep}%</span>
-                    </span>
-                    <span className="mt-1 block text-sm text-sub">You keep {p.keep}%. {p.v}</span>
-                  </button>
-                ))}
+              {/* The split */}
+              <div className="flex items-center justify-between gap-4 rounded-2xl border border-coral bg-coral/10 p-4 shadow-[0_0_40px_-12px_rgba(232,119,79,0.6)]">
+                <div className="min-w-0">
+                  <p className="font-semibold">You keep {pricing.keep}% of every license.</p>
+                  <p className="mt-1 text-sm text-sub">Castkey’s {pricing.fee}% covers payments, verification and the deals team. Licenses start at ${pricing.minLicense}/month.</p>
+                </div>
+                <span className="shrink-0 font-display text-5xl tracking-[-0.03em]">{pricing.keep}%</span>
               </div>
 
               <div className="mt-4 flex flex-wrap items-center gap-3">

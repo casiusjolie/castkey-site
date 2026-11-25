@@ -56,9 +56,9 @@ export function RequestScreen() {
 }
 
 export function EarningsScreen() {
-  const [numRef, n] = useCountUpOnView<HTMLParagraphElement>(1445, 1400)
+  const [numRef, n] = useCountUpOnView<HTMLParagraphElement>(1360, 1400)
   return (
-    <Frame title="Earnings" status="Paid monthly" label="App preview: earnings of $1,445 this month from two brands, paid automatically on the 1st.">
+    <Frame title="Earnings" status="Paid monthly" label="App preview: earnings of $1,360 this month from two brands, paid automatically on the 1st.">
       <p className="text-xs text-mute">This month</p>
       <p ref={numRef} className="mt-1 font-display text-5xl tabular-nums tracking-[-0.03em]">${Math.round(n).toLocaleString('en-US')}</p>
       <div className="mt-3 flex h-10 items-end gap-1" aria-hidden="true">
@@ -67,11 +67,11 @@ export function EarningsScreen() {
         ))}
       </div>
       <ul className="mt-4 divide-y divide-line text-sm">
-        {[['Skincare brand', '+$680'], ['Fitness app', '+$765']].map(([k, v]) => (
+        {[['Skincare brand', '+$640'], ['Fitness app', '+$720']].map(([k, v]) => (
           <li key={k} className="flex justify-between py-2.5"><span className="text-sub">{k}</span><span className="font-semibold tabular-nums text-ice">{v}</span></li>
         ))}
       </ul>
-      <p className="mt-3 rounded-xl bg-ink-850 px-3 py-2 text-xs text-sub">Castkey Exclusive · you keep 85% · manager split paid automatically</p>
+      <p className="mt-3 rounded-xl bg-ink-850 px-3 py-2 text-xs text-sub">You keep 80% · manager split paid automatically</p>
       <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-mute">Next payout · the 1st</p>
     </Frame>
   )
