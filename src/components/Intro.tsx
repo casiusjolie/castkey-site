@@ -230,7 +230,7 @@ export function Intro() {
     const timer = window.setTimeout(() => setHeld(true), 180)
     press.current = { t: performance.now(), x: e.clientX, timer }
   }
-  const onUp = (e: React.PointerEvent) => {
+  const onUp = () => {
     const p = press.current
     press.current = null
     if (!p) return
