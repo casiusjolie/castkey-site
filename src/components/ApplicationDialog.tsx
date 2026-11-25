@@ -171,7 +171,7 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
             <Mark className="h-8 w-8 shrink-0 text-paper" />
             <div>
               <h2 id="apply-title" className="font-display text-2xl leading-tight tracking-[-0.01em] sm:text-3xl">{isPartner ? 'Bring your roster to Castkey.' : isBrand ? 'Get access to the world’s best faces.' : 'Apply as a creator'}</h2>
-              <p className="text-xs text-mute">{isPartner ? 'For agencies, managers and scouts. Upload your roster, keep your split, earn 5% on every creator you bring.' : isBrand ? 'License verified creators’ faces and voices, with a reviewed training pack of photos, talking videos and voice recordings ready for your AI tools. Request a demo for early access.' : 'Early access waitlist'}</p>
+              <p className="text-xs text-mute">{isPartner ? 'For agencies, managers and scouts. Upload your roster, keep your split, earn 5% on every creator you bring.' : isBrand ? 'Stop settling for fake AI people. License verified creators’ faces and voices, with a reviewed training pack of photos, talking videos and voice recordings ready for your AI tools.' : 'Early access waitlist'}</p>
             </div>
           </div>
           <button type="button" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line hover:bg-ink-800" aria-label="Close" onClick={() => ref.current?.close()}>

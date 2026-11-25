@@ -72,7 +72,7 @@ export const everyone = {
     {
       who: 'Brands',
       line: 'Real faces at AI production speed.',
-      points: ['Licensed, verified people instead of synthetic strangers', 'Content made without booking a shoot', 'Clear rules and a record of what you licensed', 'One subscription per creator'],
+      points: ['Real, licensed people instead of fake AI avatars', 'Content made without booking a shoot', 'Clear rules and a record of what you licensed', 'One subscription per creator'],
       cta: 'Request a demo',
       action: 'brand',
     },

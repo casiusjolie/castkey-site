@@ -39,19 +39,19 @@ const SCENES: Scene[] = [
       <div className="grid w-full max-w-5xl items-center gap-10 md:grid-cols-2">
         <div>
           <Eyebrow dark>The problem</Eyebrow>
-          <h2 className="iz mt-3 font-display text-5xl leading-none tracking-[-0.03em] text-ink-950 sm:text-6xl" style={d(250)}>AI ads are using real faces.</h2>
-          <p className="iz mt-5 max-w-[36ch] text-lg text-ink-900/70" style={d(450)}>Brands now make ads with AI. The people in them often never said yes, and never got paid.</p>
+          <h2 className="iz mt-3 font-display text-4xl leading-none tracking-[-0.03em] text-ink-950 sm:text-6xl" style={d(250)}>Brands are stuck using fake AI people.</h2>
+          <p className="iz mt-4 max-w-[38ch] text-base text-ink-900/70 sm:mt-5 sm:text-lg" style={d(450)}>Brands make ads with AI now, but there’s been no simple, legal way to use a real person. So they settle for generic AI avatars that audiences can spot. Real creators get nothing.</p>
         </div>
         <div>
           <div className="grid grid-cols-3 gap-3">
             {[jordan, casius, maya].map((src, i) => (
               <figure key={i} className="iz relative overflow-hidden rounded-2xl bg-ink-900/10" style={d(500 + i * 140)} {...(i === 1 ? { 'data-portal': '' } : {})}>
-                <img src={src} alt="" className="aspect-[4/5] w-full object-cover grayscale" />
-                <span className="iz absolute inset-x-2 bottom-2 rounded-full bg-ink-950/75 py-1 text-center text-xs font-medium text-paper backdrop-blur" style={d(1300 + i * 200)}>Said yes?</span>
+                <img src={src} alt="" className={`aspect-[4/5] w-full object-cover ${i === 1 ? '' : 'grayscale'}`} />
+                <span className={`iz absolute inset-x-2 bottom-2 rounded-full py-1 text-center text-xs font-medium backdrop-blur ${i === 1 ? 'bg-coral text-ink-950' : 'bg-ink-950/75 text-paper'}`} style={d(1300 + i * 200)}>{i === 1 ? 'Real, licensed' : 'AI fake'}</span>
               </figure>
             ))}
           </div>
-          <p className="iz mt-3 text-xs text-ink-900/50" style={d(900)}>Example faces. Two are AI generated.</p>
+          <p className="iz mt-3 text-xs text-ink-900/50" style={d(900)}>Left and right are AI-generated. The middle is a real creator.</p>
         </div>
       </div>
     ),
@@ -161,21 +161,33 @@ const SCENES: Scene[] = [
   {
     id: 'three', ms: 5800, tone: 'paper', label: 'Who gets paid',
     body: () => (
-      <div className="grid w-full max-w-5xl items-center gap-10 md:grid-cols-2">
+      <div className="grid w-full max-w-6xl items-center gap-8 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-12">
         <div>
           <Eyebrow dark>How the money moves</Eyebrow>
           <h2 className="iz mt-3 font-display text-4xl leading-none tracking-[-0.03em] text-ink-950 sm:text-6xl" style={d(250)}>Every deal pays everyone who made it happen.</h2>
-          <p className="iz mt-4 max-w-[38ch] text-base text-ink-900/70 sm:mt-5 sm:text-lg" style={d(450)}>The brand pays. The creator keeps 80%, minus their manager’s split if they have one (never more than 20%). Whoever referred them earns 5%, paid by Castkey.</p>
+          <p className="iz mt-4 max-w-[38ch] text-base text-ink-900/70 sm:mt-5 sm:text-lg" style={d(450)}>The creator keeps 80%, minus their manager’s split if they have one (never more than 20%). Whoever referred them earns 5%, paid by Castkey.</p>
         </div>
-        <ul className="space-y-2 sm:space-y-3">
-          {[['The brand pays', '$1,000', 'bg-ice', 100], ['The creator keeps', '$640', 'bg-coral', 64], ['Their manager earns', '$160', 'bg-ink-700', 16], ['The referrer earns', '$50', 'bg-ink-950', 5]].map(([k, v, c, w], i) => (
-            <li key={k as string} className="iz rounded-2xl bg-white/60 p-3 text-ink-950 sm:p-4" style={d(700 + i * 400)} {...(i === 3 ? { 'data-portal': '' } : {})}>
-              <div className="flex items-baseline justify-between"><span className="text-sm font-medium sm:text-base">{k as string}</span><span className="font-display text-3xl tracking-[-0.02em] sm:text-4xl">{v as string}</span></div>
-              <div className="mt-2 h-2 rounded-full bg-ink-950/10"><div className={`h-2 rounded-full ${c as string}`} style={{ width: `${Math.max(3, w as number)}%` }} /></div>
-            </li>
-          ))}
-          <li className="iz text-xs text-ink-900/60" style={d(2100)}>Example: $1,000 license with a 20% management split. No manager? The creator keeps $800.</li>
-        </ul>
+        <div className="text-ink-950">
+          <div className="iz flex items-baseline justify-between rounded-2xl bg-ink-950 px-5 py-4 text-paper" style={d(600)}>
+            <span className="text-sm font-medium sm:text-base">The brand pays</span>
+            <span className="font-display text-4xl tracking-[-0.02em] sm:text-5xl">$1,000</span>
+          </div>
+          <p className="iz py-2 text-center text-xs text-ink-900/60 sm:text-sm" style={d(900)}>↓ split automatically by Castkey</p>
+          {/* One bar = the whole $1,000, so every share is drawn to scale */}
+          <div className="iz flex h-4 overflow-hidden rounded-full" style={d(1100)} aria-hidden="true">
+            <div className="bg-coral" style={{ width: '64%' }} /><div className="bg-ink-700" style={{ width: '16%' }} /><div className="bg-ice" style={{ width: '5%' }} /><div className="bg-ink-950/15" style={{ width: '15%' }} />
+          </div>
+          <ul className="mt-3 grid grid-cols-3 gap-2 sm:gap-3">
+            {[['Creator', '$640', '64%', 'bg-coral'], ['Manager', '$160', '16%', 'bg-ink-700'], ['Referrer', '$50', '5%', 'bg-ice']].map(([k, v, p, c], i) => (
+              <li key={k} className="iz rounded-2xl bg-white/70 p-3 sm:p-4" style={d(1400 + i * 300)} {...(i === 2 ? { 'data-portal': '' } : {})}>
+                <span className="flex items-center gap-1.5 text-xs font-medium sm:text-sm"><i className={`h-2 w-2 shrink-0 rounded-full ${c}`} />{k}</span>
+                <span className="mt-1 block font-display text-3xl tracking-[-0.02em] sm:text-4xl">{v}</span>
+                <span className="text-xs text-ink-900/60">{p}<span className="hidden sm:inline"> of the deal</span></span>
+              </li>
+            ))}
+          </ul>
+          <p className="iz mt-3 text-xs text-ink-900/60" style={d(2400)}>Castkey keeps the remaining $150. Example: $1,000 license with a 20% management split. No manager? The creator keeps $800.</p>
+        </div>
       </div>
     ),
   },
