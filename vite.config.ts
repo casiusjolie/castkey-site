@@ -36,6 +36,14 @@ const PAGES: Record<string, { path: string; title: string; description: string; 
     image: 'og-home.jpg',
     alt: 'Castkey privacy notice.',
   },
+  'app/index.html': {
+    path: '/app/',
+    title: 'Castkey',
+    description: 'Sign in to Castkey.',
+    image: 'og-home.jpg',
+    alt: 'Castkey.',
+    noindex: true,
+  },
   'invited/index.html': {
     path: '/invited/',
     title: 'You’re invited to Castkey',
@@ -102,6 +110,7 @@ export default defineConfig(({ mode }) => {
               invited: resolve(__dirname, 'invited/index.html'),
               investors: resolve(__dirname, 'investors/index.html'),
               privacy: resolve(__dirname, 'privacy/index.html'),
+              app: resolve(__dirname, 'app/index.html'),
             },
           },
         },

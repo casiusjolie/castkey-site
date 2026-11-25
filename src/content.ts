@@ -37,7 +37,7 @@ export const pricing = {
   managerCap: 20, // max % of the creator's share a manager can take
   fee: 20, // Castkey's fee, % of each license
   keep: 80, // the creator's share, % of each license (before any manager split)
-  minLicense: 250, // lowest monthly license price, so fixed payment costs stay small
+  minLicense: 100, // lowest monthly license price, so fixed payment costs stay small
 } as const
 
 export const how = {
@@ -129,7 +129,7 @@ export const invite = {
 }
 
 export const faq = [
-  { q: 'How do I get paid?', a: 'Brands subscribe monthly to your license. You keep 80% of every payment, and payouts are automatic every month. Licenses start at $250 a month.' },
+  { q: 'How do I get paid?', a: 'Brands subscribe monthly to your license. You keep 80% of every payment, and payouts are automatic every month. Licenses start at $100 a month.' },
   { q: 'What are open calls and minimums?', a: 'Brands post open calls with what they’ll pay. Your inbound minimum is the least a brand can offer when they reach out to you. When you apply to an open call yourself, you can accept less if the deal is right.' },
   { q: 'Do I approve every brand?', a: 'Yes. You accept, counter or decline every request, and you can message the brand in the app first.' },
   { q: 'What do brands get?', a: 'Your training pack (photos, talking videos and voice recordings) plus a written license: where it runs, for how long, and your rules. Every profile needs a pack before it goes live.' },
