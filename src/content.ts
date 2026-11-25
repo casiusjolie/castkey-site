@@ -46,7 +46,7 @@ export const how = {
   steps: [
     { k: 'Brands find you', v: 'Set your monthly minimum. Brands that reach out must meet it. No manager? Our team brings you deals.' },
     { k: 'Or you find them', v: 'Browse open calls: brands post what they’ll pay. Apply to the ones you like, and go below your minimum if you want.' },
-    { k: 'You decide', v: 'Accept, counter or decline every request, and talk to brands in the app.' },
+    { k: 'You decide', v: 'Accept, counter or decline every request. Set your rules, even the age you can be shown as.' },
     { k: 'You get paid monthly', v: 'Brands subscribe to your license. Payouts are automatic.' },
   ],
 }
@@ -100,6 +100,7 @@ export const exampleListing = {
   allowed: ['Fashion and lifestyle campaigns', 'Product demos and explainers', 'App and tech content', 'Paid social ads'],
   never: ['Politics', 'Gambling', 'Medical or health claims', 'Fake reviews or testimonials'],
   wardrobe: 'No visible third party logos. Styling approved per campaign.',
+  age: 'Shown as 22–30 · ads aimed at 18+ only',
   voice: 'First person and natural. No profanity, no impersonating other people.',
   pack: 'Photos, talking videos and voice notes · reviewed by Castkey',
   packItems: ['Photos', 'Talking videos', 'Voice notes'],
@@ -136,6 +137,7 @@ export const faq = [
   { q: 'What do brands get?', a: 'Your training pack (photos, talking videos and voice recordings) plus a written license: where it runs, for how long, and your rules. Every profile needs a pack before it goes live.' },
   { q: 'Can my manager run my profile?', a: 'Yes, with the permissions you choose. Their split is paid automatically and can’t be more than 20% of your share.' },
   { q: 'How do referrals work?', a: 'Get your link and share it. When a creator you refer is approved and starts earning, you get 5% of every deal they do, up to $10,000 per creator, paid by Castkey.' },
+  { q: 'Can I choose what age I’m shown as?', a: 'Yes. On any deal you can set the age range your AI likeness can be shown as, and the youngest audience the ads can be aimed at. No one is ever shown as under 18.' },
   { q: 'Is adult content allowed?', a: 'No. Adult content using our creators is prohibited in all licensing deals. Alcohol, cannabis and betting brands only reach creators who opt in.' },
   { q: 'Is Castkey live?', a: 'We’re in early access, onboarding the first creators and brands now. Applying is free.' },
 ]

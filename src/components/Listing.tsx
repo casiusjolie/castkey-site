@@ -112,6 +112,7 @@ function Phone() {
                     <ul className="mt-2 flex flex-wrap gap-1">{L.never.map((x) => <li key={x} className="rounded-full border border-coral/40 px-2 py-0.5 text-xs text-sub">{x}</li>)}</ul>
                   </div>
                   <dl className="grid gap-2 rounded-2xl bg-ink-850 p-3 text-xs">
+                    <div><dt className="text-mute">Age</dt><dd className="mt-0.5 text-sub">{L.age}</dd></div>
                     <div><dt className="text-mute">Wardrobe</dt><dd className="mt-0.5 text-sub">{L.wardrobe}</dd></div>
                     <div><dt className="text-mute">Voice</dt><dd className="mt-0.5 text-sub">{L.voice}</dd></div>
                   </dl>
