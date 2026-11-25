@@ -140,8 +140,8 @@ const SCENES: Scene[] = [
       <div className="grid w-full max-w-5xl items-center gap-10 md:grid-cols-2">
         <div>
           <Eyebrow>A marketplace, with a team</Eyebrow>
-          <h2 className="iz mt-3 font-display text-5xl leading-none tracking-[-0.03em] sm:text-6xl" style={d(250)}>Brands find you. Our team helps.</h2>
-          <p className="iz mt-5 max-w-[38ch] text-lg text-sub" style={d(450)}>Your profile shows up when brands search. No manager? Our team finds AI deals for you and talks you through every request, all in the app.</p>
+          <h2 className="iz mt-3 font-display text-4xl leading-none tracking-[-0.03em] sm:text-6xl" style={d(250)}>Brands find you. Our team helps.</h2>
+          <p className="iz mt-4 max-w-[38ch] text-base text-sub sm:mt-5 sm:text-lg" style={d(450)}>Your profile shows up when brands search. No manager? Our team finds AI deals for you and talks you through every request, all in the app.</p>
         </div>
         <div className="iz rounded-3xl border border-line bg-ink-850 p-5" style={d(550)}>
           <p className="rounded-xl border border-line bg-ink-900 px-3 py-2 text-sm text-sub">Brand search · fitness · 25–34 · face and voice</p>
@@ -159,22 +159,22 @@ const SCENES: Scene[] = [
     ),
   },
   {
-    id: 'three', ms: 5200, tone: 'paper', label: 'Who gets paid',
+    id: 'three', ms: 5800, tone: 'paper', label: 'Who gets paid',
     body: () => (
       <div className="grid w-full max-w-5xl items-center gap-10 md:grid-cols-2">
         <div>
           <Eyebrow dark>How the money moves</Eyebrow>
-          <h2 className="iz mt-3 font-display text-5xl leading-none tracking-[-0.03em] text-ink-950 sm:text-6xl" style={d(250)}>Three people get paid on every deal.</h2>
-          <p className="iz mt-5 max-w-[38ch] text-lg text-ink-900/70" style={d(450)}>The brand pays. The creator keeps 80%. Whoever referred the creator earns 5%, paid by Castkey.</p>
+          <h2 className="iz mt-3 font-display text-4xl leading-none tracking-[-0.03em] text-ink-950 sm:text-6xl" style={d(250)}>Every deal pays everyone who made it happen.</h2>
+          <p className="iz mt-4 max-w-[38ch] text-base text-ink-900/70 sm:mt-5 sm:text-lg" style={d(450)}>The brand pays. The creator keeps 80%, minus their manager’s split if they have one (never more than 20%). Whoever referred them earns 5%, paid by Castkey.</p>
         </div>
-        <ul className="space-y-3">
-          {[['The brand pays', '$1,000', 'bg-ice', 100], ['The creator keeps', '$800', 'bg-coral', 80], ['The referrer earns', '$50', 'bg-ink-950', 5]].map(([k, v, c, w], i) => (
-            <li key={k as string} className="iz rounded-2xl bg-white/60 p-4 text-ink-950" style={d(700 + i * 450)} {...(i === 2 ? { 'data-portal': '' } : {})}>
-              <div className="flex items-baseline justify-between"><span className="text-base font-medium">{k as string}</span><span className="font-display text-4xl tracking-[-0.02em]">{v as string}</span></div>
+        <ul className="space-y-2 sm:space-y-3">
+          {[['The brand pays', '$1,000', 'bg-ice', 100], ['The creator keeps', '$640', 'bg-coral', 64], ['Their manager earns', '$160', 'bg-ink-700', 16], ['The referrer earns', '$50', 'bg-ink-950', 5]].map(([k, v, c, w], i) => (
+            <li key={k as string} className="iz rounded-2xl bg-white/60 p-3 text-ink-950 sm:p-4" style={d(700 + i * 400)} {...(i === 3 ? { 'data-portal': '' } : {})}>
+              <div className="flex items-baseline justify-between"><span className="text-sm font-medium sm:text-base">{k as string}</span><span className="font-display text-3xl tracking-[-0.02em] sm:text-4xl">{v as string}</span></div>
               <div className="mt-2 h-2 rounded-full bg-ink-950/10"><div className={`h-2 rounded-full ${c as string}`} style={{ width: `${Math.max(3, w as number)}%` }} /></div>
             </li>
           ))}
-          <li className="iz text-xs text-ink-900/60" style={d(2100)}>Example: one $1,000 monthly license. Referral rewards cap at $10,000 per creator.</li>
+          <li className="iz text-xs text-ink-900/60" style={d(2100)}>Example: $1,000 license with a 20% management split. No manager? The creator keeps $800.</li>
         </ul>
       </div>
     ),

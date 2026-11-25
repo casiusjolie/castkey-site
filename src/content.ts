@@ -104,16 +104,45 @@ export const referral = {
 
 export const ecosystem = {
   eyebrow: 'How the money moves',
-  title: 'Three people get paid on every deal.',
-  lead: 'Every license has a brand paying, a creator earning, and the person who brought that creator in collecting a share, for as long as the creator keeps earning (up to $10,000).',
+  title: 'Every deal pays everyone who made it happen.',
+  lead: 'A brand pays one monthly license. Castkey holds the payment, enforces the creator’s rules, and splits it automatically between the creator, the creator’s manager or agency, and whoever referred the creator. Nobody invoices anybody.',
   example: 1000,
-  people: [
-    { k: 'The brand', role: 'Pays', amount: 1000, v: 'Subscribes to license a verified creator’s face and voice for its AI content, inside the creator’s rules.', tone: 'ice' },
-    { k: 'The creator', role: 'Keeps 80%', amount: 800, v: 'Approves the brand, sets the price, and is paid every month the license runs.', tone: 'coral' },
-    { k: 'The referrer', role: 'Earns 5%', amount: 50, v: 'Whoever invited the creator: another creator, a manager or a friend. Paid from Castkey’s share, up to $10,000 per creator.', tone: 'paper' },
+  maxSplit: 20,
+  roles: [
+    { k: 'Brand', v: 'Pays a monthly license to use a verified creator’s face and voice, inside the creator’s rules.' },
+    { k: 'Creator', v: 'Owns their likeness. Keeps 80% of every payment, minus any management split they agree to.' },
+    { k: 'Manager or agency', v: 'Optional. Manages the creator’s profile with their permission and earns an agreed split, never more than 20% of the creator’s earnings.' },
+    { k: 'Referrer', v: 'Whoever brought the creator in: another creator, a friend, or the agency itself. Earns 5%, paid from Castkey’s share, up to $10,000 per creator.' },
   ],
-  castkey: { k: 'Castkey', amount: 150, v: 'Runs the marketplace, the team that finds deals, verification and payments. 15% when a referrer is paid, 20% when not.' },
-  note: 'Have a manager or agency? Their split comes out of the creator’s 80% at the rate you agree, paid automatically. Example: one $1,000 monthly license; prices are set by each creator, and figures are illustrative, not an estimate of earnings.',
+  permissions: {
+    title: 'Creators decide what their manager can do',
+    items: [
+      { k: 'Edit the profile, rules and training pack', on: true },
+      { k: 'Reply to brands and counter-offer', on: true },
+      { k: 'Accept requests on the creator’s behalf', on: true },
+      { k: 'See earnings and payout reports', on: true },
+      { k: 'Change payout details', on: false },
+    ],
+    note: 'Creators can change or remove these permissions at any time. The management split is set together, shown to both sides, and capped at 20% by Castkey to protect creators.',
+  },
+  note: 'Example: one $1,000 monthly license. Prices are set by each creator; figures are illustrative, not an estimate of earnings.',
+}
+
+export const assets = {
+  eyebrow: 'What brands are buying',
+  title: 'A license to a real person, with everything AI needs to get them right.',
+  lead: 'Every Castkey profile requires a training pack. Creators upload it once, our team reviews it against their rules, and only then can brands license them. A subscription gives a brand access to that pack, plus the written rights to use it.',
+  pack: [
+    { k: 'Photo set', v: 'High-resolution photos from every angle, with a range of expressions, outfits and lighting, so AI images look like the real person.' },
+    { k: 'Talking videos', v: 'Short clips speaking to camera, so AI video matches how the creator moves, gestures and talks.' },
+    { k: 'Voice recordings', v: 'Clean recordings of scripted and natural speech, so an AI voice sounds like them. Voice-only creators upload just this.' },
+  ],
+  rights: [
+    { k: 'The license', v: 'Where the content can run (social, paid ads, web, in-app), for how long, and whether it’s exclusive.' },
+    { k: 'The creator’s rules', v: 'What they’ll never say, wear or do, attached to every license and checked by Castkey.' },
+    { k: 'Usage reports', v: 'Brands report where the content ran and the ad spend behind it each month. Creators can audit it.' },
+  ],
+  note: 'Access to the training pack lasts while the subscription is active. What happens to trained models and files when it ends is set in each license.',
 }
 
 export const agencies = {
@@ -123,10 +152,10 @@ export const agencies = {
   points: [
     { k: 'Upload your roster', v: 'Send us your roster and we onboard every creator together, with verification and listings set up for you. Built for large rosters.' },
     { k: 'Manage it in one place', v: 'See every request across your creators, accept, counter or decline on their behalf with their permission, and track what each license earns.' },
-    { k: 'Your split, built in', v: 'Set your management commission per creator. It’s paid to you automatically every month, before the creator’s share lands. No invoicing, no chasing.' },
+    { k: 'Your split, built in', v: 'Each creator gives you permission to manage their profile and agrees your commission, up to 20% of their earnings. Castkey pays it to you automatically every month. No invoicing, no chasing.' },
     { k: 'Plus 5% for bringing them', v: 'Every creator you onboard also earns you the referral reward: 5% of what they make, up to $10,000 each, paid from Castkey’s share.' },
   ],
-  example: 'Example: a brand pays $1,000. The creator’s 80% is $800; with a 20% management split, $160 goes to the agency and $640 to the creator. The agency’s $50 referral reward comes from Castkey’s share.',
+  example: 'Example: a brand pays $1,000. The creator’s 80% is $800; at the 20% maximum split, $160 goes to the agency and $640 to the creator. If the agency also referred the creator, its $50 referral reward comes from Castkey’s share, not the creator’s.',
   cta: 'Talk to us about your roster',
   note: 'Roster onboarding, the management dashboard and automatic splits are being built for launch. Tell us about your roster and we’ll set you up first.',
 }
@@ -273,7 +302,7 @@ export const creatorPay = {
   ],
   steps: [
     { k: 'Apply', v: 'Three quick questions, about two minutes.' },
-    { k: 'Get verified and set up', v: 'If you’re a fit, we verify your profile. Then you upload your training pack, write your rules and set your price.' },
+    { k: 'Get verified and upload your pack', v: 'If you’re a fit, we verify your profile. Then you upload your training pack (photos, talking videos and voice recordings), write your rules and set your price. Every profile needs a pack before brands can license it.' },
     { k: 'Get reviewed', v: 'We check your pack against your rules before anyone can license it.' },
     { k: 'Accept requests, get paid', v: 'Brands send usage requests. You accept, adjust or decline. Accepted requests start a monthly subscription.' },
   ],
@@ -381,7 +410,7 @@ export const faq = [
   },
   {
     q: 'I have a manager. How do they get paid?',
-    a: 'Management splits are built in. Your manager sets their commission with you, and Castkey pays it to them automatically from your share each month, so nobody has to invoice anyone. Agencies can also upload and manage their whole roster.',
+    a: 'Management splits are built in. You give your manager permission to manage your profile and agree their commission together, up to 20% of your earnings. Castkey won’t allow more than 20%, to protect creators, and pays the split automatically each month so nobody has to invoice anyone. You can change their permissions at any time.',
   },
   {
     q: 'I don’t have a manager. Who finds me deals?',
