@@ -115,7 +115,7 @@ function Phone() {
                   </div>
                   <div className="rounded-2xl bg-ink-850 p-3">
                     <p className="text-xs font-medium text-coral">Never</p>
-                    <ul className="mt-2 flex flex-wrap gap-1">{[...L.never, 'Nudity or explicit content'].map((x) => <li key={x} className="rounded-full border border-coral/40 px-2 py-0.5 text-xs text-sub">{x}</li>)}</ul>
+                    <ul className="mt-2 flex flex-wrap gap-1">{L.never.map((x) => <li key={x} className="rounded-full border border-coral/40 px-2 py-0.5 text-xs text-sub">{x}</li>)}</ul>
                   </div>
                   <dl className="grid gap-2 rounded-2xl bg-ink-850 p-3 text-xs">
                     <div><dt className="text-mute">Wardrobe</dt><dd className="mt-0.5 text-sub">{L.wardrobe}</dd></div>

@@ -223,7 +223,7 @@ export function Invite() {
                 </div>
                 <label htmlFor="ap-note" className="field-label mt-5">Anything else we should know? <span className="font-normal text-mute">(optional)</span></label>
                 <textarea id="ap-note" rows={2} maxLength={600} className="field resize-y" value={note} onChange={(e) => setNote(e.target.value)} placeholder="e.g. no fast food brands" />
-                <p className="mt-3 text-xs text-mute">Nudity is never allowed on Castkey, so you don’t need to add it.</p>
+                <p className="mt-3 text-xs text-mute">Adult content using our creators is prohibited in all licensing deals, so you don’t need to add it.</p>
               </Step>
 
               <div className="hidden" aria-hidden="true">
