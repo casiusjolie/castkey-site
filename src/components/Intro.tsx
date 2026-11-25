@@ -58,27 +58,18 @@ const SCENES: Scene[] = [
     ),
   },
   {
-    id: 'brands', ms: 5200, tone: 'ink', label: 'Why brands pay',
+    id: 'brands', ms: 4600, tone: 'ink', label: 'Why brands pay',
     body: () => (
       <div className="grid w-full max-w-5xl items-center gap-10 md:grid-cols-2">
         <div>
           <Eyebrow>Why brands pay</Eyebrow>
-          <h2 className="iz mt-3 font-display text-4xl leading-none tracking-[-0.03em] sm:text-6xl" style={d(250)}>One license. Every ad version.</h2>
-          <p className="iz mt-4 max-w-[38ch] text-base text-sub sm:mt-5 sm:text-lg" style={d(450)}>Brands test dozens of hooks and scripts to find an ad that works. With your license they make every version in their AI tools, without paying for new shoots each time.</p>
-          <p className="iz mt-5 text-sm text-mute" style={d(700)}><span className="font-display text-3xl text-paper">86%</span>&nbsp; of ad buyers use or plan to use AI for video ads (IAB, 2025)</p>
+          <h2 className="iz mt-3 font-display text-4xl leading-none tracking-[-0.03em] sm:text-6xl" style={d(250)}>Almost every brand is going AI.</h2>
+          <p className="iz mt-4 max-w-[38ch] text-base text-sub sm:mt-5 sm:text-lg" style={d(450)}>They want real people their customers trust, not fake AI faces. With your license they can make as many ads as they need, without a new shoot every time.</p>
         </div>
-        <div className="grid gap-3">
-          <div className="iz rounded-3xl border border-line bg-ink-850 p-5" style={d(700)}>
-            <p className="text-sm text-sub">Filming 20 UGC videos</p>
-            <p className="mt-1 font-display text-5xl tracking-[-0.03em] text-paper/60 line-through decoration-paper/30">≈ $3,080</p>
-            <p className="mt-1 text-xs text-mute">20 × $154 average UGC payout, 2026</p>
-          </div>
-          <div className="iz rounded-3xl border border-coral/60 bg-coral/10 p-5" style={d(1300)} data-portal>
-            <p className="text-sm text-sub">One Castkey license</p>
-            <p className="mt-1 font-display text-5xl tracking-[-0.03em]">from $100/mo</p>
-            <p className="mt-1 text-xs text-mute">every version within the license</p>
-          </div>
-          <p className="text-xs text-mute">Example. UGC price: Collabstr 2026 report.</p>
+        <div className="iz rounded-3xl border border-coral/60 bg-coral/10 p-6 sm:p-8" style={d(650)} data-portal>
+          <p className="font-display text-7xl leading-none tracking-[-0.04em] sm:text-8xl">9 in 10</p>
+          <p className="mt-4 max-w-[28ch] text-lg text-sub">advertisers are using or planning to use AI to make their video ads.</p>
+          <p className="mt-4 text-xs text-mute">Source: IAB, 2025</p>
         </div>
       </div>
     ),
