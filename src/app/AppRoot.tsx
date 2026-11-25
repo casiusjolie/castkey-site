@@ -4,6 +4,7 @@ import { supabase, supabaseReady, friendly, type Brand, type Creator, type Profi
 import { Wordmark } from '../components/Logo'
 import { CreatorSetup, CreatorHome } from './Creator'
 import { BrandSetup, BrandHome } from './Brand'
+import { BugReport } from '../components/BugReport'
 
 // The Castkey app at /app. Sign in by email link, pick a role once, then set up a creator or brand profile.
 
@@ -13,9 +14,11 @@ export function Shell({ children, email }: { children: ReactNode; email?: string
       <header className="border-b border-line">
         <div className="wrap flex h-16 items-center justify-between gap-4">
           <a href="/" aria-label="Castkey home" className="flex items-center"><Wordmark /></a>
+          {!email && <BugReport label="Report a bug" className="press min-h-10 rounded-full px-3 text-sm text-sub hover:text-paper" />}
           {email && (
             <div className="flex items-center gap-3 text-sm">
               <span className="hidden text-mute sm:inline">{email}</span>
+              <BugReport label="Report a bug" className="press min-h-10 rounded-full px-3 text-sm text-sub hover:text-paper" email={email} account={email} />
               <button type="button" className="btn-ghost press min-h-10 px-3 text-sm" onClick={() => supabase.auth.signOut()}>Sign out</button>
             </div>
           )}

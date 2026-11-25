@@ -40,6 +40,12 @@ const TABS = {
     cols: [],
     required: ['name', 'email', 'code'],
   },
+  bug: {
+    tab: 'Bugs',
+    cols: ['submittedAt', 'what', 'steps', 'page', 'email', 'account', 'device', '_status'],
+    required: ['what'],
+    appendOnly: true,
+  },
   privacy: {
     tab: 'Requests',
     cols: ['submittedAt', 'email', 'request', 'details', '_status'],
@@ -63,7 +69,8 @@ function doPost(e) {
     for (const k of spec.required) {
       if (!String(f[k] || '').trim()) return reply({ received: false, error: 'missing ' + k });
     }
-    if (!EMAIL_RE.test(String(f.email))) return reply({ received: false, error: 'bad email' });
+    const needsEmail = spec.required.indexOf('email') >= 0 || String(f.email || '').trim();
+    if (needsEmail && !EMAIL_RE.test(String(f.email))) return reply({ received: false, error: 'bad email' });
 
     let issued = '';
     const lock = LockService.getScriptLock();
@@ -216,11 +223,25 @@ const LABELS = {
   neverAllowed: 'Never allowed', note: 'Notes', invitedBy: 'Invited by (code)', inviteCode: 'Their invite code',
   company: 'Company', website: 'Website', brandType: 'Type', intendedUse: 'What they want',
   adSpend: 'Paid ads / month', creatorSpend: 'Creators & UGC / month', paysUsage: 'Pays for usage rights', aiTools: 'AI ad tools',
-  request: 'Request', details: 'Details', code: 'Referral code', rosterSize: 'Roster size', managesDeals: 'Handles brand deals',
+  request: 'Request', details: 'Details', what: 'What happened', steps: 'Steps to repeat', page: 'Page', account: 'Signed in as', device: 'Device', code: 'Referral code', rosterSize: 'Roster size', managesDeals: 'Handles brand deals',
 };
 
 function notify(tab, f, updated) {
   try {
+    if (tab === 'Bugs') {
+      const msg = {
+        to: Session.getEffectiveUser().getEmail(),
+        subject: 'Castkey bug: ' + String(f.what || '').replace(/\s+/g, ' ').slice(0, 70),
+        body: 'Forward this to Claude, or say "check the bugs".\n\n' +
+          ['what', 'steps', 'page', 'email', 'account', 'device']
+            .filter(function (k) { return String(f[k] || '').trim(); })
+            .map(function (k) { return LABELS[k] + ': ' + String(f[k]).slice(0, 2000); }).join('\n') +
+          '\n\nAll bug reports: https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit',
+      };
+      if (EMAIL_RE.test(String(f.email || ''))) msg.replyTo = String(f.email);
+      MailApp.sendEmail(msg);
+      return;
+    }
     const kind = { Creators: 'creator', Brands: 'brand', Partners: 'partner', Requests: 'privacy request', Codes: 'referral link' }[tab];
     const lines = Object.keys(LABELS)
       .filter(function (k) { return String(f[k] || '').trim(); })
