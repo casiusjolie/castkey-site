@@ -1,0 +1,18 @@
+# Netlify builds the site from GitHub with these settings.
+[build]
+  command = "npm ci && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  VITE_MULTI_PAGE = "1"
+  VITE_SITE_URL = "https://getcastkey.netlify.app"
+  VITE_SUBMISSION_MODE = "endpoint"
+  # Public intake URL (Google Apps Script web app). Not a secret: it only accepts applications.
+  VITE_FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxjwKZeMWQBY3ksGAzIZABCN6qLsRh4wAZAm74MtzjYO5SpYSOd1TdQn2wV4Jig265f/exec"
+
+[[headers]]
+  for = "/investors/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "no-referrer"
