@@ -28,15 +28,15 @@ export const hero = {
   },
 }
 
-// Pricing: one source of truth for every fee on the page.
+// Pricing: one source of truth for every fee on the page. Brands pay no extra fee; Castkey's fee comes
+// out of the license. Castkey's own net is never shown to creators (the referral is paid from it).
 export const pricing = {
-  brandFee: 10, // % brands pay on top of the creator's price
   referral: 5, // % of each deal paid to whoever referred the creator, from Castkey's share
   referralCap: '$10,000',
   managerCap: 20, // max % of the creator's share a manager can take
   plans: [
     { id: 'standard', k: 'Standard', fee: 20, keep: 80, v: 'List on Castkey and anywhere else.' },
-    { id: 'exclusive', k: 'Castkey Exclusive', fee: 10, keep: 90, v: 'License your AI likeness only through Castkey for 12 months. Get top placement, a deals contact, and a spot in Castkey’s own ads (you approve each one).' },
+    { id: 'exclusive', k: 'Castkey Exclusive', fee: 15, keep: 85, v: 'License your AI likeness only through Castkey for 12 months. Get top placement, a deals contact, and a spot in Castkey’s own ads (you approve each one).' },
   ],
 } as const
 
@@ -127,8 +127,8 @@ export const invite = {
 }
 
 export const faq = [
-  { q: 'How do I get paid?', a: 'Brands subscribe monthly to your license. You keep 80%, or 90% with Castkey Exclusive. Brands pay Castkey’s 10% brand fee on top, so it never comes out of your share.' },
-  { q: 'What is Castkey Exclusive?', a: 'Commit your AI likeness to Castkey for 12 months and our fee drops from 20% to 10%. You get top placement, a deals contact, and Castkey can feature you in its own ads, with your approval on each. Your normal sponsored posts aren’t affected.' },
+  { q: 'How do I get paid?', a: 'Brands subscribe monthly to your license. You keep 80%, or 85% with Castkey Exclusive. Payouts are automatic every month.' },
+  { q: 'What is Castkey Exclusive?', a: 'Commit your AI likeness to Castkey for 12 months and our fee drops from 20% to 15%. You get top placement, a deals contact, and Castkey can feature you in its own ads, with your approval on each. Your normal sponsored posts aren’t affected.' },
   { q: 'Do I approve every brand?', a: 'Yes. You accept, counter or decline every request, and you can message the brand in the app first.' },
   { q: 'What do brands get?', a: 'Your training pack (photos, talking videos and voice recordings) plus a written license: where it runs, for how long, and your rules. Every profile needs a pack before it goes live.' },
   { q: 'Can my manager run my profile?', a: 'Yes, with the permissions you choose. Their split is paid automatically and can’t be more than 20% of your share.' },

@@ -4,7 +4,7 @@ import { EarningsScreen } from './AppScreens'
 import { ReferralKit } from './InviteSomeone'
 
 // How creators get paid: pick a plan, toggle a manager and a referral, see the split of one license.
-// Math (license L): brand pays L + 10% brand fee. Creator share = L × (1 − plan fee).
+// Math (license L): creator share = L × (1 − plan fee). No brand fee.
 // Manager takes up to 20% of the creator's share. Referrer earns 5% of L, paid out of Castkey's fee.
 
 const usd = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`
@@ -40,7 +40,6 @@ export function Earn() {
   ]
 
   return (
-    <>
       <section id="earn" aria-labelledby="earn-h" className="band border-t border-line">
         <div className="wrap" data-reveal>
           <div className="max-w-[680px]">
@@ -79,7 +78,7 @@ export function Earn() {
 
               {/* Result */}
               <div className="mt-6 border-t border-line pt-6" aria-live="polite">
-                <p className="text-sm text-sub">A brand licenses you for <span className="text-paper">{usd(L)}/month</span>. They pay a {pricing.brandFee}% fee to Castkey on top.</p>
+                <p className="text-sm text-sub">A brand licenses you for <span className="text-paper">{usd(L)}/month</span>.</p>
                 <ul className="mt-4 grid gap-3">
                   {rows.map((r) => (
                     <li key={r.k} className={`transition-opacity duration-300 ${r.amount === 0 ? 'opacity-40' : ''}`}>
@@ -97,8 +96,12 @@ export function Earn() {
           </div>
         </div>
       </section>
+  )
+}
 
-      {/* Refer band */}
+// Refer band: sits near the bottom of the page, above the FAQ.
+export function Refer() {
+  return (
       <section id="refer" aria-labelledby="refer-h" className="bg-coral text-ink-950">
         <div className="wrap grid gap-8 py-16 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center" data-reveal>
           <div>
@@ -112,6 +115,5 @@ export function Earn() {
           </div>
         </div>
       </section>
-    </>
   )
 }

@@ -12,7 +12,7 @@ const MINE_KEY = 'ck_mycode'
 const KEEP_MS = 60 * 864e5
 
 export const CODE_RE = /^[a-z0-9][a-z0-9-]{1,18}[a-z0-9]$/
-const RESERVED = ['admin', 'castkey', 'invite', 'invited', 'investors', 'privacy', 'apply', 'brand', 'brands', 'creator', 'creators', 'partner', 'partners', 'support', 'help', 'team', 'official', 'test']
+const RESERVED = ['admin', 'castkey', 'invite', 'invited', 'investors', 'privacy', 'apply', 'join', 'demo', 'refer', 'earn', 'how', 'faq', 'agencies', 'brand', 'brands', 'creator', 'creators', 'partner', 'partners', 'support', 'help', 'team', 'official', 'test']
 
 export const normCode = (c: string) => c.trim().toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 20)
 export const validCode = (c: string) => CODE_RE.test(c) && !RESERVED.includes(c)

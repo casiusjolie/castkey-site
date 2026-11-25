@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Mark } from './Logo'
 import { arrivedWithRef } from '../lib/referral'
+import { fastTrackKey } from '../lib/fasttrack'
 import casius from '../assets/casius.jpg'
 import maya from '../assets/maya.jpg'
 import jordan from '../assets/jordan.jpg'
@@ -111,7 +112,7 @@ const SCENES: Scene[] = [
         <div>
           <Eyebrow>Getting paid</Eyebrow>
           <h2 className="iz mt-3 font-display text-5xl leading-none tracking-[-0.03em] sm:text-6xl" style={d(250)}>Brands pay you every month.</h2>
-          <p className="iz mt-5 max-w-[36ch] text-lg text-sub" style={d(450)}>Brands pay monthly for as long as they use your likeness. You keep 80%, or 90% with Castkey Exclusive.</p>
+          <p className="iz mt-5 max-w-[36ch] text-lg text-sub" style={d(450)}>Brands pay monthly for as long as they use your likeness. You keep 80%, or 85% with Castkey Exclusive.</p>
         </div>
         <div className="iz rounded-3xl border border-line bg-ink-850 p-5" style={d(550)}>
           <div className="flex items-center justify-between text-sm">
@@ -165,11 +166,11 @@ const SCENES: Scene[] = [
         <div>
           <Eyebrow dark>How the money moves</Eyebrow>
           <h2 className="iz mt-3 font-display text-4xl leading-none tracking-[-0.03em] text-ink-950 sm:text-6xl" style={d(250)}>Every deal pays everyone who made it happen.</h2>
-          <p className="iz mt-4 max-w-[38ch] text-base text-ink-900/70 sm:mt-5 sm:text-lg" style={d(450)}>The creator keeps 80% (90% if exclusive), minus any manager split, capped at 20%. Whoever referred them earns 5%, paid by Castkey.</p>
+          <p className="iz mt-4 max-w-[38ch] text-base text-ink-900/70 sm:mt-5 sm:text-lg" style={d(450)}>The creator keeps 80% (85% if exclusive), minus any manager split, capped at 20%. Whoever referred them earns 5%, paid by Castkey.</p>
         </div>
         <div className="text-ink-950">
           <div className="iz flex items-baseline justify-between rounded-2xl bg-ink-950 px-5 py-4 text-paper" style={d(600)}>
-            <span className="text-sm font-medium sm:text-base">The brand pays <span className="text-paper/60">+ 10% fee</span></span>
+            <span className="text-sm font-medium sm:text-base">The brand pays</span>
             <span className="font-display text-4xl tracking-[-0.02em] sm:text-5xl">$1,000</span>
           </div>
           <p className="iz py-2 text-center text-xs text-ink-900/60 sm:text-sm" style={d(900)}>↓ split automatically by Castkey</p>
@@ -186,7 +187,7 @@ const SCENES: Scene[] = [
               </li>
             ))}
           </ul>
-          <p className="iz mt-3 text-xs text-ink-900/60" style={d(2400)}>Castkey keeps $150 plus the brand’s fee. Example: Standard plan, 20% manager split.</p>
+          <p className="iz mt-3 text-xs text-ink-900/60" style={d(2400)}>Example: $1,000 license, Standard plan, 20% manager split.</p>
         </div>
       </div>
     ),
@@ -199,7 +200,7 @@ const SCENES: Scene[] = [
 
 function shouldShow() {
   try {
-    if (arrivedWithRef() || /\/(invited?|r\/[^/]+)\/?$/.test(location.pathname) || location.hash) return false
+    if (arrivedWithRef() || fastTrackKey() || /\/(invited?|r\/[^/]+)\/?$/.test(location.pathname) || location.hash) return false
     if (sessionStorage.getItem(SEEN)) return false
   } catch { /* storage blocked: show it */ }
   return true

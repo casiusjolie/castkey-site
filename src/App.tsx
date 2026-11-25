@@ -8,7 +8,8 @@ import { FAQ, Closing } from './components/Sections'
 import { Invite } from './components/Invite'
 import { Listing } from './components/Listing'
 import { HowItWorks } from './components/HowItWorks'
-import { Earn } from './components/Earn'
+import { Earn, Refer } from './components/Earn'
+import { FAST_TRACKS, fastTrackKey } from './lib/fasttrack'
 import { Agencies } from './components/Agencies'
 import { ApplicationDialog } from './components/ApplicationDialog'
 import { Wordmark } from './components/Logo'
@@ -63,6 +64,29 @@ export default function App() {
       setTimeout(() => el?.querySelector<HTMLElement>('input, button')?.focus({ preventScroll: true }), 450)
     } else setAudience(a)
   }
+  // Fast-track links (/apply, /brands, /agencies, /refer, /earn, /how, /faq, or the same as #hash).
+  useEffect(() => {
+    const go = () => {
+      const key = fastTrackKey()
+      if (!key) return
+      const t = FAST_TRACKS[key]
+      if (t.kind === 'dialog') { setAudience(t.audience); return }
+      const el = document.getElementById(t.id)
+      if (!el) return
+      el.querySelectorAll<HTMLElement>('[data-reveal]').forEach((r) => r.classList.add('is-in'))
+      el.scrollIntoView({ block: 'start' })
+      if (t.focus) setTimeout(() => el.querySelector<HTMLElement>('input, button')?.focus({ preventScroll: true }), 300)
+    }
+    // Run after layout, then again once fonts and images settle, so the landing spot doesn't drift.
+    let n = 0
+    const settle = () => { if (n++ < 3) go() }
+    const t = setTimeout(settle, 120)
+    document.fonts?.ready.then(() => setTimeout(settle, 50))
+    if (document.readyState === 'complete') setTimeout(settle, 400)
+    else window.addEventListener('load', () => setTimeout(settle, 50), { once: true })
+    window.addEventListener('hashchange', go)
+    return () => { clearTimeout(t); window.removeEventListener('hashchange', go) }
+  }, [])
   return (
     <ApplyContext.Provider value={{ open }}>
       <Intro />
@@ -70,10 +94,11 @@ export default function App() {
       <main id="main">
         <Hero />
         <HowItWorks />
+        <Invite />
         <Listing />
         <Earn />
-        <Invite />
         <Agencies />
+        <Refer />
         <FAQ />
         <Closing />
       </main>

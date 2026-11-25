@@ -51,7 +51,7 @@ export function FAQ() {
 export function Closing() {
   const { open } = useApply()
   return (
-    <section id="apply" aria-labelledby="close-h" className="band bg-coral text-ink-950">
+    <section id="start" aria-labelledby="close-h" className="band bg-coral text-ink-950">
       <div className="wrap text-center" data-reveal>
         <h2 id="close-h" className="display-1 mx-auto max-w-[14ch]">{closing.title}</h2>
         <div className="mt-10 flex flex-col items-center gap-4">

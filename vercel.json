@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/r/:code", "destination": "/invited/index.html" },
+    { "source": "/(apply|join|creators|brands|demo|agencies|partners|refer|earn|how|faq)", "destination": "/index.html" }
+  ]
+}

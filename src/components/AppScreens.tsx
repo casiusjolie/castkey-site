@@ -21,22 +21,27 @@ function Frame({ title, children, label }: { title: string; children: ReactNode;
 
 export function RequestScreen() {
   return (
-    <Frame title="Requests" label="App preview: a new license request from a skincare brand, with Accept, Counter and Decline buttons and a message thread.">
+    <Frame title="Requests" label="App preview: a skincare brand offers $750 a month for paid social ads. The creator sends a counter offer of $900 a month, waiting for the brand to reply.">
       <p className="text-xs text-mute">New request</p>
       <p className="mt-1 text-base font-semibold">Skincare brand</p>
       <dl className="mt-3 space-y-1.5 text-sm">
-        {[['Use', 'Paid social ads'], ['Length', '3 months'], ['Offer', '$750 / month']].map(([k, v]) => (
+        {[['Use', 'Paid social ads'], ['Length', '3 months'], ['Their offer', '$750 / month']].map(([k, v]) => (
           <div key={k} className="flex justify-between"><dt className="text-mute">{k}</dt><dd>{v}</dd></div>
         ))}
       </dl>
       <div className="mt-4 grid grid-cols-3 gap-1.5 text-xs font-semibold">
-        <span className="rounded-full bg-coral py-2 text-center text-ink-950">Accept</span>
-        <span className="rounded-full border border-line py-2 text-center">Counter</span>
+        <span className="rounded-full border border-line py-2 text-center">Accept</span>
+        <span className="rounded-full bg-coral py-2 text-center text-ink-950">Counter</span>
         <span className="rounded-full border border-line py-2 text-center text-sub">Decline</span>
       </div>
-      <div className="mt-4 space-y-2 border-t border-line pt-3 text-sm">
-        <p className="w-fit max-w-[85%] rounded-2xl rounded-bl-md bg-ink-800 px-3 py-2">Can we use your voice too?</p>
-        <p className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-ice px-3 py-2 text-ink-950">Yes, for $150 more.</p>
+      <div className="mt-4 rounded-2xl border border-coral/50 bg-coral/10 p-3">
+        <div className="flex items-center justify-between text-xs">
+          <span className="font-semibold text-coral">Your counter offer</span>
+          <span className="text-mute">Sent</span>
+        </div>
+        <p className="mt-1 font-display text-3xl tracking-[-0.02em]">$900 <span className="font-sans text-sm text-sub">/ month</span></p>
+        <p className="mt-1 text-xs text-sub">Face and voice · 3 months · paid social only</p>
+        <p className="mt-2 text-xs text-mute">Waiting for the brand to accept or reply</p>
       </div>
     </Frame>
   )
@@ -44,15 +49,15 @@ export function RequestScreen() {
 
 export function EarningsScreen() {
   return (
-    <Frame title="Earnings" label="App preview: earnings of $1,440 this month from two brands, paid automatically on the 1st.">
+    <Frame title="Earnings" label="App preview: earnings of $1,445 this month from two brands, paid automatically on the 1st.">
       <p className="text-xs text-mute">This month</p>
-      <p className="mt-1 font-display text-5xl tracking-[-0.03em]">$1,440</p>
+      <p className="mt-1 font-display text-5xl tracking-[-0.03em]">$1,445</p>
       <ul className="mt-4 divide-y divide-line text-sm">
-        {[['Skincare brand', '+$720'], ['Fitness app', '+$720']].map(([k, v]) => (
+        {[['Skincare brand', '+$680'], ['Fitness app', '+$765']].map(([k, v]) => (
           <li key={k} className="flex justify-between py-2.5"><span className="text-sub">{k}</span><span className="font-semibold">{v}</span></li>
         ))}
       </ul>
-      <p className="mt-3 rounded-xl bg-ink-850 px-3 py-2 text-xs text-sub">Castkey Exclusive · you keep 90% · manager split paid automatically</p>
+      <p className="mt-3 rounded-xl bg-ink-850 px-3 py-2 text-xs text-sub">Castkey Exclusive · you keep 85% · manager split paid automatically</p>
       <p className="mt-3 text-xs text-mute">Next payout: the 1st</p>
     </Frame>
   )

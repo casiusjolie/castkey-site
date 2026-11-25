@@ -132,7 +132,7 @@ function Portal() {
       <div className="mt-12 max-w-[680px]">
         <p className="eyebrow">Investor update</p>
         <h1 className="mt-3 font-display text-5xl leading-none tracking-[-0.03em] sm:text-6xl">Demand, live.</h1>
-        <p className="mt-5 text-lg text-sub">Brands making AI ads are stuck using fake AI people. Castkey is the marketplace where they license real creators’ faces and voices instead, paid monthly. Every deal pays everyone who made it happen: the brand pays the license plus a 10% brand fee, the creator keeps 80% (90% if they license exclusively through Castkey for 12 months), their manager or agency is paid automatically (capped at 20% of the creator’s share), and whoever referred the creator earns 5% from Castkey’s share. These numbers come straight from applications as they arrive.</p>
+        <p className="mt-5 text-lg text-sub">Brands making AI ads are stuck using fake AI people. Castkey is the marketplace where they license real creators’ faces and voices instead, paid monthly. Every deal pays everyone who made it happen: the brand pays the license, the creator keeps 80% (85% if they license exclusively through Castkey for 12 months), their manager or agency is paid automatically (capped at 20% of the creator’s share), and whoever referred the creator earns 5% from Castkey’s share. These numbers come straight from applications as they arrive.</p>
       </div>
 
       {state === 'loading' && (
