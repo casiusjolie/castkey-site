@@ -47,6 +47,12 @@ const PAGES: Record<string, { path: string; title: string; description: string; 
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
 
+// On Vercel, use the project's production domain when VITE_SITE_URL isn't set, so share
+// thumbnails get absolute URLs. Set before Vite reads env so the app sees it too.
+if (!process.env.VITE_SITE_URL && process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+  process.env.VITE_SITE_URL = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+}
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const site = (env.VITE_SITE_URL || env.VITE_CANONICAL_URL || '').replace(/\/+$/, '')

@@ -1,7 +1,13 @@
 {
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "cleanUrls": true,
   "rewrites": [
     { "source": "/r/:code", "destination": "/invited/index.html" },
     { "source": "/(apply|join|creators|brands|demo|agencies|partners|refer|calls|earn|how|faq)", "destination": "/index.html" }
+  ],
+  "headers": [
+    { "source": "/investors/(.*)", "headers": [ { "key": "X-Robots-Tag", "value": "noindex, nofollow" }, { "key": "Referrer-Policy", "value": "no-referrer" } ] }
   ]
 }
