@@ -7,6 +7,7 @@ import { Hero } from './components/Hero'
 import { FAQ, Closing } from './components/Sections'
 import { Invite } from './components/Invite'
 import { Listing } from './components/Listing'
+import { OpenCalls } from './components/OpenCalls'
 import { HowItWorks } from './components/HowItWorks'
 import { Earn, Refer } from './components/Earn'
 import { FAST_TRACKS, fastTrackKey } from './lib/fasttrack'
@@ -98,6 +99,7 @@ export default function App() {
         <HowItWorks />
         <Invite />
         <Listing />
+        <OpenCalls />
         <Earn />
         <Agencies />
         <Refer />

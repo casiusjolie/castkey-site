@@ -35,7 +35,7 @@ export function FAQ() {
     <section id="faq" aria-labelledby="faq-h" className="band border-t border-line">
       <div className="wrap grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16" data-reveal>
         <div>
-          <p className="kicker"><b>07</b>FAQ</p>
+          <p className="kicker"><b>08</b>FAQ</p>
           <h2 id="faq-h" className="display-2 mt-3">Questions, answered.</h2>
         </div>
         <ul className="border-t border-line">

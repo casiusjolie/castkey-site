@@ -30,7 +30,7 @@ const SCENES: Scene[] = [
           <Mark className="h-28 w-28 sm:h-36 sm:w-36" />
         </span>
         <h2 className="iz mt-8 font-display text-5xl tracking-[-0.03em] sm:text-6xl" style={d(500)}>Castkey</h2>
-        <p className="iz mt-3 text-lg text-sub" style={d(750)}>Here is how it works, in 30 seconds.</p>
+        <p className="iz mt-3 text-lg text-sub" style={d(750)}>Here’s how it works, in 40 seconds.</p>
       </div>
     ),
   },
@@ -147,7 +147,7 @@ const SCENES: Scene[] = [
         <div className="iz rounded-3xl border border-line bg-ink-850 p-5" style={d(550)}>
           <p className="rounded-xl border border-line bg-ink-900 px-3 py-2 text-sm text-sub">Brand search · fitness · 25–34 · face and voice</p>
           <ul className="mt-3 space-y-2">
-            {[['Your profile', 'Matched · 3 brands viewed today', true], ['Request from a sportswear brand', 'Castkey team: “Good fit. Ask for 3 months.”', false], ['New message', 'Brand: “Can we use your voice too?”', false]].map(([k, v, hl], i) => (
+            {[['Your profile', 'Matched · 3 brands viewed today', true], ['Request from a sportswear brand', 'Castkey team: “Good fit. Ask for 3 months.”', false], ['New message', 'Brand: “Can you do $800 a month?”', false]].map(([k, v, hl], i) => (
               <li key={k as string} className={`iz rounded-xl border p-3 ${hl ? 'border-coral/60 bg-coral/10' : 'border-line'}`} style={d(900 + i * 450)} {...(i === 0 ? { 'data-portal': '' } : {})}>
                 <p className="text-sm font-semibold">{k as string}</p>
                 <p className="mt-0.5 text-sm text-sub">{v as string}</p>
@@ -155,6 +155,37 @@ const SCENES: Scene[] = [
             ))}
           </ul>
           <p className="mt-3 text-xs text-mute">Illustrative.</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: 'calls', ms: 5200, tone: 'ink', label: 'Open calls and your minimum',
+    body: () => (
+      <div className="grid w-full max-w-5xl items-center gap-10 md:grid-cols-2">
+        <div>
+          <Eyebrow>Open calls and your minimum</Eyebrow>
+          <h2 className="iz mt-3 font-display text-4xl leading-none tracking-[-0.03em] sm:text-6xl" style={d(250)}>Set your price. Or pick a brief.</h2>
+          <p className="iz mt-4 max-w-[38ch] text-base text-sub sm:mt-5 sm:text-lg" style={d(450)}>Brands that reach out must meet your monthly minimum. Brands also post open calls with their budget, and you can go lower when you apply to one.</p>
+        </div>
+        <div className="grid gap-3">
+          <div className="iz rounded-3xl border border-coral/60 bg-coral/10 p-5" style={d(600)} data-portal>
+            <p className="text-sm text-sub">Your inbound minimum</p>
+            <p className="mt-1 font-display text-5xl tracking-[-0.03em]">$600<span className="font-sans text-base text-sub"> / month</span></p>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {[['Skincare brand', '$600–900', 'Face + voice'], ['Coffee brand', '$400–550', 'Voice']].map(([b, p, n], i) => (
+              <div key={b} className={i ? 'rotate-[1.5deg]' : '-rotate-[1.5deg]'}>
+              <div className="iz relative rounded-2xl border border-line bg-ink-850 p-4 pt-5" style={d(1100 + i * 400)}>
+                <span className={`absolute left-1/2 top-0 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full ${i ? 'bg-ice' : 'bg-coral'}`} aria-hidden="true" />
+                <p className="text-sm font-semibold">{b}</p>
+                <p className="mt-2 font-display text-2xl tracking-[-0.02em]">{p}</p>
+                <p className="mt-1 text-xs text-sub">{n} · open call</p>
+              </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-mute">Illustrative.</p>
         </div>
       </div>
     ),

@@ -61,7 +61,7 @@ function Phone() {
 
             {/* stats */}
             <dl className="mt-3 grid grid-cols-3 divide-x divide-line rounded-2xl bg-ink-850 py-2 text-center">
-              {[['Followers', L.followers], ['Licenses', 'Face + voice'], ['Exclusivity', 'Open']].map(([k, v]) => (
+              {[['Followers', L.followers], ['Licenses', 'Face + voice'], ['Min / month', 'On request']].map(([k, v]) => (
                 <div key={k} className="px-1">
                   <dd className="text-sm font-semibold text-paper">{v}</dd>
                   <dt className="text-xs text-mute">{k}</dt>

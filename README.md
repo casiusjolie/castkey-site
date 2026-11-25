@@ -165,7 +165,7 @@ Short links that skip the intro and land on the right spot. Share them in bios, 
 | `/apply` (also `/join`, `/creators`) | The creator application, cursor in the first field |
 | `/brands` (also `/demo`) | The brand demo request form |
 | `/agencies` (also `/partners`) | The agency and partner form |
-| `/refer`, `/earn`, `/how`, `/faq` | That section of the page |
+| `/calls`, `/refer`, `/earn`, `/how`, `/faq` | That section of the page |
 | `/r/CODE` | A creator's referral link (tracked) |
 
 They are rewrites in `public/_redirects` (Netlify and Cloudflare Pages) and `vercel.json` (Vercel), handled by `src/lib/fasttrack.ts`. Section links also work as `#apply`, `#refer` etc.

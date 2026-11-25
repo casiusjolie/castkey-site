@@ -48,7 +48,7 @@ export function Earn() {
       <section id="earn" aria-labelledby="earn-h" className="band border-t border-line">
         <div className="wrap" data-reveal>
           <div className="max-w-[680px]">
-            <p className="kicker"><b>04</b>Earnings</p>
+            <p className="kicker"><b>05</b>Earnings</p>
             <h2 id="earn-h" className="display-2 mt-4">{earn.title}</h2>
             <p className="lede mt-6">{earn.lead}</p>
           </div>
@@ -111,7 +111,7 @@ export function Refer() {
       <section id="refer" aria-labelledby="refer-h" className="bg-coral text-ink-950">
         <div className="wrap grid gap-8 py-16 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center" data-reveal>
           <div>
-            <p className="kicker !text-ink-900/70 [&>b]:!text-ink-950 after:!bg-ink-950/30"><b>06</b>Referrals</p>
+            <p className="kicker !text-ink-900/70 [&>b]:!text-ink-950 after:!bg-ink-950/30"><b>07</b>Referrals</p>
             <h2 id="refer-h" className="display-2 mt-4 max-w-[16ch]">{referral.headline}</h2>
             <p className="mt-4 max-w-[44ch] text-lg text-ink-900/80">{referral.short}</p>
             <p className="mt-3 max-w-[50ch] text-sm text-ink-900/70">{referral.rules.join(' ')} {referral.note}</p>

@@ -36,6 +36,7 @@ export function RequestScreen() {
           <div key={k} className="flex justify-between"><dt className="text-mute">{k}</dt><dd>{v}</dd></div>
         ))}
       </dl>
+      <p className="mt-2 inline-flex items-center gap-1.5 text-xs text-ice"><svg viewBox="0 0 16 16" className="h-3 w-3" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>Above your $600 minimum</p>
       <div className="mt-4 grid grid-cols-3 gap-1.5 text-xs font-semibold">
         <span className="rounded-full border border-line py-2 text-center">Accept</span>
         <span className="rounded-full bg-coral py-2 text-center text-ink-950 shadow-[0_0_24px_-4px_rgba(232,119,79,0.7)]">Counter</span>
@@ -94,6 +95,26 @@ export function PackScreen() {
         ))}
       </ul>
       <span className="mt-4 block rounded-full bg-paper py-2 text-center text-xs font-semibold text-ink-950">Record a voice note</span>
+    </Frame>
+  )
+}
+
+export function MinimumScreen() {
+  return (
+    <Frame title="Your rate" status="Profile" label="App preview: the creator's inbound minimum set to $600 a month, with a switch on that allows lower offers when they apply to open calls.">
+      <p className="text-xs text-mute">Inbound minimum</p>
+      <p className="mt-1 font-display text-5xl tracking-[-0.03em]">$600<span className="font-sans text-base text-sub"> / month</span></p>
+      <div className="mt-4 h-1.5 rounded-full bg-ink-800" aria-hidden="true">
+        <div className="relative h-1.5 w-[40%] rounded-full bg-coral">
+          <span className="absolute -right-2 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full bg-paper shadow-[0_0_0_4px_rgba(232,119,79,0.25)]" />
+        </div>
+      </div>
+      <p className="mt-3 text-xs text-sub">Brands that reach out must offer at least this.</p>
+      <div className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-line px-3 py-2.5">
+        <span className="text-sm">Flexible on open calls</span>
+        <span className="relative h-5 w-9 shrink-0 rounded-full bg-coral" aria-hidden="true"><span className="absolute left-0 top-0.5 h-4 w-4 translate-x-[18px] rounded-full bg-paper" /></span>
+      </div>
+      <p className="mt-2 text-xs text-mute">You can accept less when you apply yourself.</p>
     </Frame>
   )
 }

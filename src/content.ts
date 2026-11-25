@@ -5,6 +5,7 @@ import casiusPhoto from './assets/casius.jpg'
 
 export const nav = [
   { id: 'how', label: 'How it works' },
+  { id: 'calls', label: 'Open calls' },
   { id: 'earn', label: 'Earn' },
   { id: 'agencies', label: 'Agencies' },
   { id: 'faq', label: 'FAQ' },
@@ -43,7 +44,8 @@ export const pricing = {
 export const how = {
   title: 'How it works.',
   steps: [
-    { k: 'Brands find you', v: 'Your profile shows up when brands search. No manager? Our team brings you deals.' },
+    { k: 'Brands find you', v: 'Set your monthly minimum. Brands that reach out must meet it. No manager? Our team brings you deals.' },
+    { k: 'Or you find them', v: 'Browse open calls: brands post what they’ll pay. Apply to the ones you like, and go below your minimum if you want.' },
     { k: 'You decide', v: 'Accept, counter or decline every request, and talk to brands in the app.' },
     { k: 'You get paid monthly', v: 'Brands subscribe to your license. Payouts are automatic.' },
   ],
@@ -129,6 +131,7 @@ export const invite = {
 export const faq = [
   { q: 'How do I get paid?', a: 'Brands subscribe monthly to your license. You keep 80%, or 85% with Castkey Exclusive. Payouts are automatic every month.' },
   { q: 'What is Castkey Exclusive?', a: 'Commit your AI likeness to Castkey for 12 months and our fee drops from 20% to 15%. You get top placement, a deals contact, and Castkey can feature you in its own ads, with your approval on each. Your normal sponsored posts aren’t affected.' },
+  { q: 'What are open calls and minimums?', a: 'Brands post open calls with what they’ll pay. Your inbound minimum is the least a brand can offer when they reach out to you. When you apply to an open call yourself, you can accept less if the deal is right.' },
   { q: 'Do I approve every brand?', a: 'Yes. You accept, counter or decline every request, and you can message the brand in the app first.' },
   { q: 'What do brands get?', a: 'Your training pack (photos, talking videos and voice recordings) plus a written license: where it runs, for how long, and your rules. Every profile needs a pack before it goes live.' },
   { q: 'Can my manager run my profile?', a: 'Yes, with the permissions you choose. Their split is paid automatically and can’t be more than 20% of your share.' },
@@ -136,6 +139,24 @@ export const faq = [
   { q: 'Is adult content allowed?', a: 'No. Adult content using our creators is prohibited in all licensing deals. Alcohol, cannabis and betting brands only reach creators who opt in.' },
   { q: 'Is Castkey live?', a: 'We’re in early access, onboarding the first creators and brands now. Applying is free.' },
 ]
+
+export const calls = {
+  title: 'Brands post what they’ll pay. You pick.',
+  lead: 'Open calls are a bulletin board of paid briefs. See the budget up front and apply in a tap.',
+  board: [
+    { brand: 'Skincare brand', need: 'Face + voice', use: 'Paid social ads', length: '3 months', pay: '$600–900', tag: 'Women 25–34', pin: 'coral' },
+    { brand: 'Fitness app', need: 'Face', use: 'App store and ads', length: '6 months', pay: '$1,200', tag: 'Any fitness creator', pin: 'ice' },
+    { brand: 'Coffee brand', need: 'Voice', use: 'Radio and podcast ads', length: '2 months', pay: '$400–550', tag: 'Warm, calm voice', pin: 'paper' },
+    { brand: 'Fintech app', need: 'Face + voice', use: 'Explainer videos', length: '12 months', pay: '$2,000', tag: 'Founders and creators', pin: 'ice' },
+    { brand: 'Sneaker label', need: 'Face', use: 'Product drops', length: '1 month', pay: '$750', tag: 'Streetwear', pin: 'coral' },
+    { brand: 'Travel app', need: 'Face + voice', use: 'Destination guides', length: '4 months', pay: '$500–800', tag: 'Travel creators', pin: 'paper' },
+  ],
+  minimum: {
+    k: 'Your inbound minimum',
+    v: 'Brands that request you must offer at least this. Open calls are yours to judge: go lower when the deal is worth it.',
+  },
+  brandCta: 'Brands: post an open call',
+}
 
 export const closing = {
   title: 'Your face. Your terms.',
