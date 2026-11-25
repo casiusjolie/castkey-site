@@ -15,6 +15,7 @@ export default {
       },
       fontFamily: {
         display: ['Newsreader', 'Iowan Old Style', 'Georgia', 'serif'],
+        mono: ['Geist Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
         sans: ['Geist', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
       },
       maxWidth: { page: '1200px' },

@@ -158,7 +158,7 @@ export function Listing() {
     <section id="listing" aria-labelledby="listing-h" className="band border-t border-line">
       <div className="wrap grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-20" data-reveal>
         <div>
-          <p className="eyebrow">Your listing</p>
+          <p className="kicker"><b>03</b>Your listing</p>
           <h2 id="listing-h" className="display-2 mt-3">This is what brands see.</h2>
           <p className="mt-4 max-w-[44ch] text-lg text-sub">Your photo, your rules and your price, on one page. Brands send a request; you decide.</p>
           <p className="mt-8"><span className="tag-ill">{L.badge}</span></p>

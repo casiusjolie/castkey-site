@@ -135,12 +135,12 @@ export function Invite() {
     <section id="invite" aria-labelledby="invite-h" className="band relative overflow-hidden">
       <div className="wrap relative">
         <div className="mx-auto max-w-[720px] text-center">
-          <p className="eyebrow">{invite.eyebrow}</p>
+          <p className="kicker"><b>02</b>Apply</p>
           <h2 id="invite-h" className="display-2 mt-3">{invite.title}</h2>
           <p className="lede mx-auto mt-6">{invite.body}</p>
         </div>
 
-        <div className="mx-auto mt-12 max-w-[760px] rounded-3xl border border-line bg-ink-900 p-6 shadow-[0_60px_140px_-50px_rgba(0,0,0,.9)] sm:p-10">
+        <div className="mx-auto mt-12 max-w-[760px] lit rounded-3xl p-6 sm:p-10">
           {done ? (
             <div className="step-in-fwd" role="status">
               <h3 ref={doneRef} tabIndex={-1} className="font-display text-4xl leading-tight tracking-[-0.02em] outline-none">

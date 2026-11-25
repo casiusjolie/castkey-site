@@ -10,6 +10,7 @@ import { Listing } from './components/Listing'
 import { HowItWorks } from './components/HowItWorks'
 import { Earn, Refer } from './components/Earn'
 import { FAST_TRACKS, fastTrackKey } from './lib/fasttrack'
+import { useSpotlight } from './lib/motion'
 import { Agencies } from './components/Agencies'
 import { ApplicationDialog } from './components/ApplicationDialog'
 import { Wordmark } from './components/Logo'
@@ -45,6 +46,7 @@ function Footer({ open }: { open: (a: Audience) => void }) {
 
 export default function App() {
   const [audience, setAudience] = useState<Audience | null>(null)
+  useSpotlight()
   // Scroll reveals: each [data-reveal] rises in once as it enters the viewport.
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>('[data-reveal]')

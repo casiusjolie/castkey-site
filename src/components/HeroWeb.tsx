@@ -47,7 +47,7 @@ function Pulse({ x, y, w, h, at, color }: { x: number; y: number; w: number; h: 
   )
 }
 
-const STEPS = ['A brand licenses a creator', 'Castkey checks the rules and splits it', 'Everyone is paid, every month']
+const STEPS = ['Brand licenses a creator', 'Castkey checks and splits it', 'Everyone gets paid monthly']
 
 export function HeroWeb() {
   const [step, setStep] = useState(0)
@@ -83,16 +83,25 @@ export function HeroWeb() {
   return (
     <figure className="relative px-4 py-6 sm:px-8 sm:py-8" aria-label="How a Castkey deal pays out: a brand pays $1,000 a month. Castkey checks the creator's rules and splits it: the creator keeps $800, or $850 with Castkey Exclusive; an optional manager earns up to 20% of the creator's share; whoever referred the creator earns $50, paid by Castkey.">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-left">
-        <p className="text-sm font-medium" aria-live="off">
-          <span className="text-coral">{step + 1}/3</span> <span className="text-paper">{STEPS[step]}</span>
-        </p>
-        <span className="tag-ill">Example · $1,000 / month license</span>
+        <div className="flex items-center gap-3" aria-live="off">
+          <span className="flex gap-1" aria-hidden="true">
+            {STEPS.map((_, i) => <span key={i} className={`h-1 w-6 rounded-full transition-colors duration-500 ${i <= step ? 'bg-coral' : 'bg-paper/15'}`} />)}
+          </span>
+          <span className="font-mono text-xs uppercase tracking-[0.08em] text-sub">{STEPS[step]}</span>
+        </div>
+        <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-mute">Example · $1,000 / mo license</span>
       </div>
 
       {/* Desktop and tablet */}
       <svg viewBox="0 0 1000 440" className="hidden w-full md:block" aria-hidden="true" fontFamily="Geist, ui-sans-serif, system-ui, sans-serif">
+        <defs>
+          <filter id="hw-glow" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="6" /></filter>
+        </defs>
         <path d={inPath} stroke={LINE} strokeWidth="1.5" fill="none" />
         {outs.map((o) => <path key={o.k} d={outPath(o.y)} stroke={LINE} strokeWidth="1.5" fill="none" />)}
+        <path d={inPath} stroke={ICE} strokeOpacity="0.5" strokeWidth="1.5" fill="none" className="hw-flow" strokeLinecap="round" />
+        {outs.map((o) => <path key={o.k} d={outPath(o.y)} stroke={o.color} strokeOpacity="0.45" strokeWidth="1.5" fill="none" className="hw-flow" strokeLinecap="round" />)}
+        <rect x={hub.x - 10} y={hub.y - 10} width={hub.w + 20} height={hub.h + 20} rx={26} fill={CORAL} opacity="0.12" filter="url(#hw-glow)" />
         <Node {...brand} k="Brand pays" amount="$1,000/mo" sub="for one license" tone="ice" />
         <Node {...hub} k="Castkey" sub="Checks rules · splits it" tone="hub" />
         {outs.map((o) => <Node key={o.k} x={ox} y={o.y} w={ow} h={oh} k={o.k} amount={o.amount} sub={o.sub} tone={o.tone} />)}
@@ -106,6 +115,8 @@ export function HeroWeb() {
       <svg viewBox="0 0 360 540" className="w-full md:hidden" aria-hidden="true" fontFamily="Geist, ui-sans-serif, system-ui, sans-serif">
         <path d={mIn} stroke={LINE} strokeWidth="1.5" fill="none" />
         {mo.map((o) => <path key={o.k} d={mOut(o)} stroke={LINE} strokeWidth="1.5" fill="none" />)}
+        <path d={mIn} stroke={ICE} strokeOpacity="0.5" strokeWidth="1.5" fill="none" className="hw-flow" strokeLinecap="round" />
+        {mo.map((o) => <path key={o.k} d={mOut(o)} stroke={o.color} strokeOpacity="0.45" strokeWidth="1.5" fill="none" className="hw-flow" strokeLinecap="round" />)}
         <Node {...mb} k="Brand pays" amount="$1,000/mo" tone="ice" />
         <Node {...mh} k="Castkey" sub="Checks rules · splits it" tone="hub" />
         {mo.map((o) => <Node key={o.k} x={o.x} y={o.y} w={o.w} h={100} k={o.k} amount={o.amount} sub={o.sub} tone={o.tone} />)}

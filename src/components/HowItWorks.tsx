@@ -6,7 +6,8 @@ export function HowItWorks() {
     <section id="how" aria-labelledby="how-h" className="band border-t border-line">
       <div className="wrap grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-20" data-reveal>
         <div>
-          <h2 id="how-h" className="display-2">{how.title}</h2>
+          <p className="kicker"><b>01</b>How it works</p>
+          <h2 id="how-h" className="display-2 mt-4">{how.title}</h2>
           <ol className="mt-10 grid gap-6">
             {how.steps.map((s, i) => (
               <li key={s.k} className="flex gap-4">

@@ -9,7 +9,7 @@ export function Agencies() {
       <div className="wrap" data-reveal>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           <div>
-            <p className="eyebrow">{agencies.eyebrow}</p>
+            <p className="kicker"><b>05</b>Agencies</p>
             <h2 id="ag-h" className="display-2 mt-3">{agencies.title}</h2>
             <p className="lede mt-6">{agencies.lead}</p>
             <button type="button" className="btn-primary press mt-8" onClick={() => open('partner')}>{agencies.cta}</button>
@@ -18,7 +18,7 @@ export function Agencies() {
           <div>
             <ol className="grid gap-3">
               {agencies.points.map((p, i) => (
-                <li key={p.k} className="rounded-3xl border border-line bg-ink-900 p-6">
+                <li key={p.k} className="lit rounded-3xl p-6" data-spot>
                   <span className="grid h-8 w-8 place-items-center rounded-full bg-coral text-sm font-semibold text-ink-950" aria-hidden="true">{i + 1}</span>
                   <h3 className="mt-4 font-sans text-lg font-semibold">{p.k}</h3>
                   <p className="mt-2 text-sm text-sub">{p.v}</p>
