@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { invite } from '../content'
 import { getSubmitter, legalLinks, makeInviteCode, readInviteCode, type CreatorFields } from '../lib/submit'
-import { InviteActions, InviteSomeone, siteLink } from './InviteSomeone'
+import { CodeInput, CodeStatus, InviteActions, InviteSomeone, useCodeCheck } from './InviteSomeone'
+import { normCode, refLink, saveMyCode, suggestCode } from '../lib/referral'
+import { referral } from '../content'
 
 // The creator application: one short page, three plain questions.
 // Identity is verified later, when an approved creator sets up their profile.
@@ -54,17 +56,23 @@ export function Invite() {
   const [message, setMessage] = useState('')
   const [invitedBy, setInvitedBy] = useState('')
   const [myCode, setMyCode] = useState('')
+  const [want, setWant] = useState('')
+  const [wantTouched, setWantTouched] = useState(false)
+  const check = useCodeCheck(want)
   const firstInput = useRef(0) // when the person first typed or tapped in the form
   const doneRef = useRef<HTMLHeadingElement>(null)
 
   // Arriving through someone's invite link or the shared application page: remember who invited them.
   useEffect(() => {
     const code = readInviteCode()
-    const invitePage = /\/invited?\/?$/.test(location.pathname)
+    const invitePage = /\/(invited?|r\/[^/]+)\/?$/.test(location.pathname)
     if (!code && !invitePage) return
     if (code) setInvitedBy(code)
     setTimeout(() => document.getElementById('invite')?.scrollIntoView({ block: 'start' }), 600)
   }, [])
+
+  // Suggest a referral link from their social handle or name until they type their own.
+  useEffect(() => { if (!wantTouched) setWant(suggestCode(profile, name)) }, [profile, name, wantTouched])
 
   const done = status === 'demo' || status === 'received'
   useEffect(() => { if (done) doneRef.current?.focus() }, [done])
@@ -82,6 +90,7 @@ export function Invite() {
     if (!profile.trim()) er.profile = 'Add the link to your main account.'
     else if (!validUrl(profile.trim())) er.profile = 'Enter a link like instagram.com/yourname.'
     if (!licensing) er.licensing = 'Choose what brands could use.'
+    if (want && check === 'taken') er.want = 'That link is taken. Try another, or clear it and we’ll make one for you.'
     setErrors(er)
     if (Object.keys(er).length) {
       const first = Object.keys(er)[0]
@@ -95,8 +104,7 @@ export function Invite() {
       setMessage('Please check your answers, then press the button again.')
       return
     }
-    const code = myCode || makeInviteCode(name)
-    setMyCode(code)
+    const code = normCode(want)
     setStatus('sending')
     setMessage('Sending your application…')
     const fields: CreatorFields = {
@@ -111,13 +119,16 @@ export function Invite() {
       inviteCode: code,
     }
     const res = await submitter.submit({ audience: 'creator', fields })
-    if (res.kind === 'received') { setStatus('received'); setMessage('Application received.') }
-    else if (res.kind === 'demo') { setStatus('demo'); setMessage('Preview only: your application was not sent.') }
+    if (res.kind === 'received') {
+      const issued = res.code || code || makeInviteCode(name)
+      setMyCode(issued); saveMyCode(issued)
+      setStatus('received'); setMessage('Application received.')
+    } else if (res.kind === 'demo') { setMyCode(code || makeInviteCode(name)); setStatus('demo'); setMessage('Preview only: your application was not sent.') }
     else { setStatus('error'); setMessage(res.message) }
   }
 
   const first = name.trim().split(/\s+/)[0]
-  const myLink = siteLink('invited', `invite-${myCode}`)
+  const myLink = refLink(myCode)
 
   return (
     <section id="invite" aria-labelledby="invite-h" className="band relative overflow-hidden">
@@ -140,9 +151,10 @@ export function Invite() {
                   : 'We read every application. If you’re a fit, we’ll email you to verify your profile and set your price.'}
               </p>
               <div className="mt-10 rounded-2xl border border-line bg-ink-850 p-5 sm:p-6">
-                <p className="text-lg font-semibold">Know someone who should be on Castkey?</p>
-                <p className="mt-1 text-sm text-sub">Send them an invite. The message is written for you, with your personal link.</p>
-                <div className="mt-5"><InviteActions link={myLink} /></div>
+                <p className="text-lg font-semibold">{referral.headline}</p>
+                <p className="mt-1 text-sm text-sub">{referral.short} Share your link; the message is written for you.</p>
+                <p className="mt-4 break-all font-mono text-base">{myLink.replace(/^https?:\/\//, '')}</p>
+                <div className="mt-4"><InviteActions link={myLink} personal /></div>
               </div>
               <button type="button" className="btn-ghost press mt-8" onClick={() => setStatus('idle')}>Edit my answers</button>
             </div>
@@ -177,6 +189,10 @@ export function Invite() {
                     <button key={a} type="button" aria-pressed={followers === a} onClick={() => setFollowers(followers === a ? '' : a)} className={chip(followers === a)}>{a}</button>
                   ))}
                 </div>
+                <label htmlFor="ap-want" className="field-label mt-5">Pick your referral link <span className="font-normal text-mute">(optional)</span></label>
+                <CodeInput id="ap-want" value={want} onChange={(v) => { setWantTouched(true); setWant(v); clear('want') }} />
+                {errors.want ? <p id="ap-want-status" className="field-err">{errors.want}</p> : <CodeStatus state={check} id="ap-want-status" />}
+                <p className="text-xs text-mute">{referral.short}</p>
               </Step>
 
               <Step n={2} title="What could brands use?" hint="You can change this later.">
@@ -230,8 +246,8 @@ export function Invite() {
         </div>
 
         <div className="mt-10 text-center">
-          <p className="mb-3 text-sm text-sub">Know a creator who should be here?</p>
-          <InviteSomeone />
+          <p className="mb-3 text-sm text-sub">Not applying yourself? You can still refer creators and earn.</p>
+          <InviteSomeone label="Get a referral link" />
         </div>
       </div>
     </section>

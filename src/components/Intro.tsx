@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Mark } from './Logo'
-import { readInviteCode } from '../lib/submit'
+import { arrivedWithRef } from '../lib/referral'
 import casius from '../assets/casius.jpg'
 import maya from '../assets/maya.jpg'
 import jordan from '../assets/jordan.jpg'
@@ -29,7 +29,7 @@ const SCENES: Scene[] = [
           <Mark className="h-28 w-28 sm:h-36 sm:w-36" />
         </span>
         <h2 className="iz mt-8 font-display text-5xl tracking-[-0.03em] sm:text-6xl" style={d(500)}>Castkey</h2>
-        <p className="iz mt-3 text-lg text-sub" style={d(750)}>Here is how it works, in 20 seconds.</p>
+        <p className="iz mt-3 text-lg text-sub" style={d(750)}>Here is how it works, in 30 seconds.</p>
       </div>
     ),
   },
@@ -110,7 +110,7 @@ const SCENES: Scene[] = [
         <div>
           <Eyebrow>Getting paid</Eyebrow>
           <h2 className="iz mt-3 font-display text-5xl leading-none tracking-[-0.03em] sm:text-6xl" style={d(250)}>Brands pay you every month.</h2>
-          <p className="iz mt-5 max-w-[36ch] text-lg text-sub" style={d(450)}>Brands pay a monthly fee for as long as they use your likeness. You keep 80%. Castkey keeps 20%.</p>
+          <p className="iz mt-5 max-w-[36ch] text-lg text-sub" style={d(450)}>Brands pay a monthly fee for as long as they use your likeness. You keep 80% of every payment.</p>
         </div>
         <div className="iz rounded-3xl border border-line bg-ink-850 p-5" style={d(550)}>
           <div className="flex items-center justify-between text-sm">
@@ -134,6 +134,51 @@ const SCENES: Scene[] = [
     ),
   },
   {
+    id: 'team', ms: 4800, tone: 'ink', label: 'Marketplace and team',
+    body: () => (
+      <div className="grid w-full max-w-5xl items-center gap-10 md:grid-cols-2">
+        <div>
+          <Eyebrow>A marketplace, with a team</Eyebrow>
+          <h2 className="iz mt-3 font-display text-5xl leading-none tracking-[-0.03em] sm:text-6xl" style={d(250)}>Brands find you. Our team helps.</h2>
+          <p className="iz mt-5 max-w-[38ch] text-lg text-sub" style={d(450)}>Your profile shows up when brands search. No manager? Our team finds AI deals for you and talks you through every request, all in the app.</p>
+        </div>
+        <div className="iz rounded-3xl border border-line bg-ink-850 p-5" style={d(550)}>
+          <p className="rounded-xl border border-line bg-ink-900 px-3 py-2 text-sm text-sub">Brand search · fitness · 25–34 · face and voice</p>
+          <ul className="mt-3 space-y-2">
+            {[['Your profile', 'Matched · 3 brands viewed today', true], ['Request from a sportswear brand', 'Castkey team: “Good fit. Ask for 3 months.”', false], ['New message', 'Brand: “Can we use your voice too?”', false]].map(([k, v, hl], i) => (
+              <li key={k as string} className={`iz rounded-xl border p-3 ${hl ? 'border-coral/60 bg-coral/10' : 'border-line'}`} style={d(900 + i * 450)} {...(i === 0 ? { 'data-portal': '' } : {})}>
+                <p className="text-sm font-semibold">{k as string}</p>
+                <p className="mt-0.5 text-sm text-sub">{v as string}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-xs text-mute">Illustrative.</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: 'three', ms: 5200, tone: 'paper', label: 'Who gets paid',
+    body: () => (
+      <div className="grid w-full max-w-5xl items-center gap-10 md:grid-cols-2">
+        <div>
+          <Eyebrow dark>How the money moves</Eyebrow>
+          <h2 className="iz mt-3 font-display text-5xl leading-none tracking-[-0.03em] text-ink-950 sm:text-6xl" style={d(250)}>Three people get paid on every deal.</h2>
+          <p className="iz mt-5 max-w-[38ch] text-lg text-ink-900/70" style={d(450)}>The brand pays. The creator keeps 80%. Whoever referred the creator earns 5%, paid by Castkey.</p>
+        </div>
+        <ul className="space-y-3">
+          {[['The brand pays', '$1,000', 'bg-ice', 100], ['The creator keeps', '$800', 'bg-coral', 80], ['The referrer earns', '$50', 'bg-ink-950', 5]].map(([k, v, c, w], i) => (
+            <li key={k as string} className="iz rounded-2xl bg-white/60 p-4 text-ink-950" style={d(700 + i * 450)} {...(i === 2 ? { 'data-portal': '' } : {})}>
+              <div className="flex items-baseline justify-between"><span className="text-base font-medium">{k as string}</span><span className="font-display text-4xl tracking-[-0.02em]">{v as string}</span></div>
+              <div className="mt-2 h-2 rounded-full bg-ink-950/10"><div className={`h-2 rounded-full ${c as string}`} style={{ width: `${Math.max(3, w as number)}%` }} /></div>
+            </li>
+          ))}
+          <li className="iz text-xs text-ink-900/60" style={d(2100)}>Example: one $1,000 monthly license. Referral rewards cap at $10,000 per creator.</li>
+        </ul>
+      </div>
+    ),
+  },
+  {
     id: 'cta', ms: 0, tone: 'ink', label: 'Start earning',
     body: () => null, // rendered by Intro so its buttons can reach the handlers
   },
@@ -141,7 +186,7 @@ const SCENES: Scene[] = [
 
 function shouldShow() {
   try {
-    if (readInviteCode() || /\/invited?\/?$/.test(location.pathname) || location.hash) return false
+    if (arrivedWithRef() || /\/(invited?|r\/[^/]+)\/?$/.test(location.pathname) || location.hash) return false
     if (sessionStorage.getItem(SEEN)) return false
   } catch { /* storage blocked: show it */ }
   return true
@@ -201,9 +246,9 @@ export function Intro() {
     })
   }, [i, last, reduce])
 
-  const close = useCallback((target?: 'invite' | 'page') => {
+  const close = useCallback((target?: 'invite' | 'page' | 'refer') => {
     try { sessionStorage.setItem(SEEN, '1') } catch { /* ignore */ }
-    if (target === 'invite') document.getElementById('invite')?.scrollIntoView({ block: 'start' })
+    if (target === 'invite' || target === 'refer') document.getElementById(target)?.scrollIntoView({ block: 'start' })
     else window.scrollTo(0, 0)
     if (reduce) { setOpen(false); return }
     setLeaving(true)
@@ -264,11 +309,15 @@ export function Intro() {
             <Mark className="iz h-12 w-12" />
             <h2 className="iz display-1 text-hero mt-8 max-w-[680px]" style={d(200)}>Get paid<br />for your face.</h2>
             <p className="iz mt-6 text-lg text-sub" style={d(450)}>Free to apply · Verified profiles only · You approve every brand</p>
-            <div className="iz mt-10 flex flex-col items-center gap-3 sm:flex-row" style={d(650)}>
-              <button type="button" className="btn-primary press min-w-[220px]" onClick={() => close('invite')}>Apply to list your likeness</button>
-              <button type="button" className="btn-ghost press min-w-[220px]" onClick={() => close('page')}>See the full page</button>
+            <div className="iz mt-8 flex flex-col items-center gap-3 sm:flex-row" style={d(650)}>
+              <button type="button" className="btn-primary press min-w-[240px]" onClick={() => close('invite')}>Apply to list your likeness</button>
+              <button type="button" className="btn-ghost press min-w-[240px]" onClick={() => close('page')}>See the full page</button>
             </div>
-            <button type="button" className="iz mt-6 text-sm text-mute hover:text-paper" style={d(900)} onClick={() => go(0)}>Watch again</button>
+            <button type="button" className="iz mt-8 w-full max-w-[520px] rounded-2xl bg-coral px-5 py-4 text-left text-ink-950 press" style={d(900)} onClick={() => close('refer')}>
+              <span className="block font-display text-2xl leading-tight sm:text-3xl">Refer creators and earn up to $10,000.</span>
+              <span className="mt-1 block text-sm">5% of what each creator you refer earns, paid by Castkey. Get your link ›</span>
+            </button>
+            <button type="button" className="iz mt-5 text-sm text-mute hover:text-paper" style={d(1100)} onClick={() => go(0)}>Watch again</button>
           </div>
         ) : s.body()}
       </div>
@@ -307,14 +356,14 @@ export function Intro() {
           ))}
         </div>
         <div className="mt-3 flex items-center justify-between">
-          <p className="text-sm font-medium opacity-70" aria-live="polite">{i + 1} of {SCENES.length} · {SCENES[i].label}</p>
+          <p className="min-w-0 truncate text-sm font-medium opacity-70" aria-live="polite">{i + 1} of {SCENES.length} · {SCENES[i].label}</p>
           <div className="flex items-center gap-1">
             {SCENES[i].ms > 0 && (
               <button type="button" className="rounded-full px-3 py-2 text-sm font-medium opacity-80 hover:opacity-100" onClick={() => setPaused((p) => !p)} aria-pressed={paused}>
                 {paused ? 'Play' : 'Pause'}
               </button>
             )}
-            <button ref={skipRef} type="button" className={`rounded-full px-4 py-2 text-sm font-semibold ${onLight ? 'bg-ink-950/10 hover:bg-ink-950/15' : 'bg-paper/10 hover:bg-paper/15'}`} onClick={() => close('page')}>
+            <button ref={skipRef} type="button" className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold ${onLight ? 'bg-ink-950/10 hover:bg-ink-950/15' : 'bg-paper/10 hover:bg-paper/15'}`} onClick={() => close('page')}>
               Skip intro
             </button>
           </div>

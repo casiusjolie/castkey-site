@@ -9,6 +9,12 @@
  *   and emails the Google account that deployed this script. No address is written here or on the site.
  * GET ?stats=1&key=… (from /investors/): anonymous totals only. The key lives in
  *   Project Settings → Script properties → INVESTOR_KEY, never in this file.
+ *
+ * Referral codes live in the Codes tab. A code is issued once, belongs to one email, and is never
+ * changed or reused. Links look like https://getcastkey.netlify.app/r/CODE.
+ *   GET ?check=CODE  → is it free?      GET ?visit=CODE → counts one link open.
+ *   POST audience "code" → claim a referral link without applying.
+ * Mark a creator "Approved" in the Creators Status column; the Codes tab counts approvals per code.
  */
 
 const SHEET_ID = '1q78py2z55qg7aTQpQZhSdY8RsJabAWBLM0ukkETiLlg'; // the "Castkey applications" sheet
@@ -26,8 +32,13 @@ const TABS = {
   },
   partner: {
     tab: 'Partners',
-    cols: ['submittedAt', 'name', 'email', 'company', 'website', 'brandType', 'intendedUse', '_status'],
+    cols: ['submittedAt', 'name', 'email', 'company', 'website', 'brandType', 'intendedUse', 'rosterSize', 'managesDeals', '_status'],
     required: ['name', 'email', 'company'],
+  },
+  code: {
+    tab: 'Codes',
+    cols: [],
+    required: ['name', 'email', 'code'],
   },
   privacy: {
     tab: 'Requests',
@@ -54,6 +65,36 @@ function doPost(e) {
     }
     if (!EMAIL_RE.test(String(f.email))) return reply({ received: false, error: 'bad email' });
 
+    let issued = '';
+    const lock = LockService.getScriptLock();
+    lock.waitLock(10000);
+    let updated = false;
+    try {
+      const book = SpreadsheetApp.openById(SHEET_ID);
+      if (body.audience === 'code') {
+        const res = reserveCode(book, f.code, f.name, f.email, 'Referral link');
+        if (res.error) return reply({ received: false, error: res.error });
+        issued = res.code;
+      } else {
+        if (body.audience === 'creator') {
+          issued = reserveCode(book, f.inviteCode, f.name, f.email, 'Application').code;
+          f.inviteCode = issued;
+          f.invitedBy = normCode(f.invitedBy);
+          if (f.invitedBy === issued) f.invitedBy = ''; // no referring yourself
+        }
+        updated = writeRow(book, spec, f);
+      }
+    } finally {
+      lock.releaseLock();
+    }
+    if (allow('emails', MAX_EMAILS_PER_HOUR, 3600)) notify(spec.tab, f, updated);
+    return reply(issued ? { received: true, code: issued } : { received: true });
+  } catch (err) {
+    return reply({ received: false, error: 'server error' });
+  }
+}
+
+function writeRow(book, spec, f) {
     const row = spec.cols.map(function (c) {
       if (c === 'submittedAt') return new Date();
       if (c === '_status') return 'New';
@@ -62,28 +103,90 @@ function doPost(e) {
       return v;
     });
 
-    let updated = false;
-    const lock = LockService.getScriptLock();
-    lock.waitLock(10000);
-    try {
-      const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(spec.tab);
-      const emailCol = spec.cols.indexOf('email') + 1;
-      const existing = spec.appendOnly ? 0 : findRowByEmail(sheet, emailCol, String(f.email));
-      if (existing) {
-        // Same person applying again: update their row instead of adding a duplicate.
-        row[row.length - 1] = 'Updated';
-        sheet.getRange(existing, 1, 1, row.length).setValues([row]);
-        updated = true;
-      } else {
-        sheet.appendRow(row);
-      }
-    } finally {
-      lock.releaseLock();
+    const sheet = book.getSheetByName(spec.tab);
+    const emailCol = spec.cols.indexOf('email') + 1;
+    const existing = spec.appendOnly ? 0 : findRowByEmail(sheet, emailCol, String(f.email));
+    if (!existing) {
+      sheet.appendRow(row);
+      return false;
     }
-    if (allow('emails', MAX_EMAILS_PER_HOUR, 3600)) notify(spec.tab, f, updated);
-    return reply({ received: true });
-  } catch (err) {
-    return reply({ received: false, error: 'server error' });
+    // Same person applying again: update their row instead of adding a duplicate.
+    const old = sheet.getRange(existing, 1, 1, row.length).getValues()[0];
+    const by = spec.cols.indexOf('invitedBy');
+    if (by >= 0 && old[by]) row[by] = old[by]; // first referrer keeps the credit
+    const status = String(old[row.length - 1] || '');
+    row[row.length - 1] = /approved|spam|test/i.test(status) ? status : 'Updated';
+    sheet.getRange(existing, 1, 1, row.length).setValues([row]);
+    return true;
+}
+
+// ---------- Referral codes ----------
+
+const CODE_RE = /^[a-z0-9][a-z0-9-]{1,18}[a-z0-9]$/;
+const RESERVED = ['admin', 'castkey', 'invite', 'invited', 'investors', 'privacy', 'apply', 'brand', 'brands', 'creator', 'creators', 'partner', 'partners', 'support', 'help', 'team', 'official', 'test'];
+
+function normCode(c) {
+  return String(c || '').trim().toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 20);
+}
+function validCode(c) {
+  return CODE_RE.test(c) && RESERVED.indexOf(c) < 0;
+}
+function codeRow(sheet, col, value) {
+  const last = sheet.getLastRow();
+  if (last < 2) return 0;
+  const vals = sheet.getRange(2, col, last - 1, 1).getValues();
+  const t = String(value).trim().toLowerCase();
+  for (let i = 0; i < vals.length; i++) if (String(vals[i][0]).trim().toLowerCase() === t) return i + 2;
+  return 0;
+}
+function makeCode(sheet, name) {
+  const base = normCode(String(name || '').split(/\s+/)[0]).replace(/-/g, '').slice(0, 12) || 'creator';
+  for (let i = 0; i < 20; i++) {
+    const c = (base.length >= 2 ? base : 'creator') + '-' + Math.random().toString(36).slice(2, 6);
+    if (!codeRow(sheet, 1, c)) return c;
+  }
+  return 'c-' + Utilities.getUuid().slice(0, 8);
+}
+
+// Caller holds the script lock. One code per email, issued once, never changed.
+function reserveCode(book, desired, name, email, source) {
+  const sheet = book.getSheetByName('Codes');
+  const mine = codeRow(sheet, 3, email);
+  if (mine) return { code: String(sheet.getRange(mine, 1).getValue()) };
+  let code = normCode(desired);
+  const strict = source !== 'Application';
+  if (!validCode(code)) {
+    if (strict) return { error: 'invalid' };
+    code = makeCode(sheet, name);
+  } else if (codeRow(sheet, 1, code)) {
+    if (strict) return { error: 'taken' };
+    code = makeCode(sheet, name);
+  }
+  const n = sheet.getLastRow() + 1;
+  sheet.getRange(n, 1, 1, 9).setValues([[code, String(name).slice(0, 120), String(email).slice(0, 200), new Date(), source, 0, '', '', '']]);
+  sheet.getRange(n, 7).setFormula('=COUNTIF(Creators!I:I,A' + n + ')');
+  sheet.getRange(n, 8).setFormula('=COUNTIFS(Creators!I:I,A' + n + ',Creators!K:K,"Approved")');
+  return { code: code };
+}
+
+function checkCode(c) {
+  const code = normCode(c);
+  if (!validCode(code)) return { ok: true, valid: false, available: false };
+  const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName('Codes');
+  return { ok: true, valid: true, available: !codeRow(sheet, 1, code) };
+}
+
+function countVisit(c) {
+  const code = normCode(c);
+  if (!validCode(code) || !allow('visits', 400, 600)) return;
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(3000)) return;
+  try {
+    const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName('Codes');
+    const row = codeRow(sheet, 1, code);
+    if (row) sheet.getRange(row, 6).setValue(Number(sheet.getRange(row, 6).getValue() || 0) + 1);
+  } finally {
+    lock.releaseLock();
   }
 }
 
@@ -113,12 +216,12 @@ const LABELS = {
   neverAllowed: 'Never allowed', note: 'Notes', invitedBy: 'Invited by (code)', inviteCode: 'Their invite code',
   company: 'Company', website: 'Website', brandType: 'Type', intendedUse: 'What they want',
   adSpend: 'Paid ads / month', creatorSpend: 'Creators & UGC / month', paysUsage: 'Pays for usage rights', aiTools: 'AI ad tools',
-  request: 'Request', details: 'Details',
+  request: 'Request', details: 'Details', code: 'Referral code', rosterSize: 'Roster size', managesDeals: 'Handles brand deals',
 };
 
 function notify(tab, f, updated) {
   try {
-    const kind = { Creators: 'creator', Brands: 'brand', Partners: 'partner', Requests: 'privacy request' }[tab];
+    const kind = { Creators: 'creator', Brands: 'brand', Partners: 'partner', Requests: 'privacy request', Codes: 'referral link' }[tab];
     const lines = Object.keys(LABELS)
       .filter(function (k) { return String(f[k] || '').trim(); })
       .map(function (k) { return LABELS[k] + ': ' + String(f[k]).slice(0, 2000); });
@@ -140,6 +243,8 @@ const MIN_BRANDS_FOR_SPEND = 3; // never show spend totals that could point to o
 
 function doGet(e) {
   const p = (e && e.parameter) || {};
+  if (p.check) return reply(checkCode(p.check));
+  if (p.visit) { countVisit(p.visit); return reply({ ok: true }); }
   if (!p.stats) return reply({ ok: true, service: 'castkey-intake' });
   const key = PropertiesService.getScriptProperties().getProperty('INVESTOR_KEY');
   if (!key || p.key !== key) return reply({ ok: false, error: 'not allowed' });
@@ -221,8 +326,28 @@ function stats() {
       aiTools: count(tools),
       usesAi: { yes: usesAi, answered: answeredTools },
     },
-    partners: { total: p.length },
+    partners: { total: p.length, roster: rosterTotals(p) },
+    referrals: referralTotals(),
     weeks: weeks,
+  };
+}
+
+const ROSTER = { '1–10': [1, 10], '11–50': [11, 50], '51–200': [51, 200], '200+': [200, 200] };
+function rosterTotals(p) {
+  let lo = 0, hi = 0;
+  p.forEach(function (r) { const x = ROSTER[r[7]]; if (x) { lo += x[0]; hi += x[1]; } });
+  return { low: lo, high: hi };
+}
+
+function referralTotals() {
+  const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName('Codes');
+  const last = sheet.getLastRow();
+  if (last < 2) return { links: 0, opens: 0, approved: 0 };
+  const v = sheet.getRange(2, 1, last - 1, 8).getValues().filter(function (r) { return r[0] && !/^test/i.test(String(r[1])); });
+  return {
+    links: v.length,
+    opens: v.reduce(function (s, r) { return s + Number(r[5] || 0); }, 0),
+    approved: v.reduce(function (s, r) { return s + Number(r[7] || 0); }, 0),
   };
 }
 

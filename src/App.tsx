@@ -9,6 +9,8 @@ import { Invite } from './components/Invite'
 import { Listing } from './components/Listing'
 import { Why } from './components/Why'
 import { CreatorPay } from './components/CreatorPay'
+import { Ecosystem } from './components/Ecosystem'
+import { Agencies } from './components/Agencies'
 import { ApplicationDialog } from './components/ApplicationDialog'
 import { Wordmark } from './components/Logo'
 import { Intro } from './components/Intro'
@@ -71,7 +73,9 @@ export default function App() {
         <Why />
         <Listing />
         <CreatorPay />
+        <Ecosystem />
         <Invite />
+        <Agencies />
         <Trust />
         <FAQ />
         <Closing />

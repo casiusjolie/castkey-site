@@ -13,7 +13,8 @@ type Stats = {
   updatedAt: string
   creators: { total: number; last7: number; invited: number; followers: Dist; licensing: Dist; reach: { low: number; high: number; answered: number } }
   brands: { total: number; last7: number; types: Dist; adSpend: Spend; creatorSpend: Spend; paysUsage: Dist; aiTools: Dist; usesAi: { yes: number; answered: number } }
-  partners: { total: number }
+  partners: { total: number; roster?: { low: number; high: number } }
+  referrals?: { links: number; opens: number; approved: number }
   weeks: { start: string; creators: number; brands: number }[]
 }
 
@@ -131,7 +132,7 @@ function Portal() {
       <div className="mt-12 max-w-[680px]">
         <p className="eyebrow">Investor update</p>
         <h1 className="mt-3 font-display text-5xl leading-none tracking-[-0.03em] sm:text-6xl">Demand, live.</h1>
-        <p className="mt-5 text-lg text-sub">Castkey lets brands license a creator’s face and voice for AI content, with the creator’s rules attached, paid monthly. These numbers come straight from creator applications and brand demo requests as they arrive.</p>
+        <p className="mt-5 text-lg text-sub">Castkey is a marketplace where brands license a creator’s face and voice for AI content, paid monthly. Every deal pays three people: the brand pays, the creator keeps 80%, and whoever referred the creator earns 5% from Castkey’s share. Agencies bring whole rosters, with their management split built in. These numbers come straight from applications as they arrive.</p>
       </div>
 
       {state === 'loading' && (
@@ -155,6 +156,12 @@ function Portal() {
             <Tile accent label="Brand demo requests" value={String(data.brands.total)} note={`${data.brands.last7} in the last 7 days · ${data.partners.total} partner applications`} />
             <Tile label="Brands’ paid ad spend" value={spendValue(data.brands.adSpend)} note={spendNote(data.brands.adSpend)} />
             <Tile label="Brands’ creator & UGC spend" value={spendValue(data.brands.creatorSpend)} note={spendNote(data.brands.creatorSpend)} />
+          </div>
+
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <Tile label="Referral links created" value={String(data.referrals?.links ?? 0)} note={`${data.referrals?.opens ?? 0} link opens so far`} />
+            <Tile label="Approved through referrals" value={String(data.referrals?.approved ?? 0)} note="Creators marked approved who came in on someone’s link" />
+            <Tile label="Creators represented by agencies" value={data.partners.roster && data.partners.roster.high ? range(data.partners.roster.low, data.partners.roster.high, people) : '—'} note={`From ${data.partners.total} agency and manager applications, self-reported in ranges`} />
           </div>
 
           <div className="mt-4"><Weekly weeks={data.weeks} /></div>

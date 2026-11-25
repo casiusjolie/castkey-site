@@ -86,7 +86,7 @@ export function Why() {
           </div>
         </div>
 
-        <ul className="mt-2 grid gap-2 md:grid-cols-3">
+        <ul className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
           {why.reasons.map((r) => (
             <li key={r.k} className="rounded-2xl border border-line p-6">
               <h3 className="text-lg font-medium">{r.k}</h3>

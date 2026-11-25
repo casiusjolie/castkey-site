@@ -21,6 +21,8 @@ export type BrandFields = {
   creatorSpend: string // monthly spend on UGC creators and influencers, incl. usage rights (brands)
   paysUsage: string // pays creators for usage rights or whitelisting today: Yes / No / Not sure
   aiTools: string // AI ad tools they use today, comma separated
+  rosterSize?: string // agencies and managers: how many creators they represent
+  managesDeals?: string // agencies and managers: do they handle brand deals for their creators today
 }
 export type CreatorFields = {
   name: string
@@ -40,7 +42,7 @@ export type Payload =
   | { audience: 'privacy'; fields: { email: string; request: string; details: string } }
 
 export type SubmitResult =
-  | { kind: 'received' } // the sheet confirmed the row was saved
+  | { kind: 'received'; code?: string } // the sheet confirmed the row was saved (creators get their referral code back)
   | { kind: 'demo' } // preview mode: nothing was sent
   | { kind: 'error'; message: string }
 
@@ -58,17 +60,8 @@ export function makeInviteCode(name: string) {
   return `${base}-${rand}`
 }
 
-/** Reads an invite code from #invite-CODE (works on the hosted preview) or ?invite=CODE. */
-export function readInviteCode(): string {
-  try {
-    const h = location.hash.match(/^#invite-([a-z0-9-]{3,40})$/i)
-    if (h) return h[1].toLowerCase()
-    const q = new URLSearchParams(location.search).get('invite')
-    return q && /^[a-z0-9-]{3,40}$/i.test(q) ? q.toLowerCase() : ''
-  } catch {
-    return ''
-  }
-}
+/** Who referred this visitor (referral link, or one remembered for 60 days). See lib/referral.ts. */
+export { readRef as readInviteCode } from './referral'
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
@@ -98,7 +91,7 @@ export function endpointSubmitter(url: string): Submitter {
         })
         if (res.status === 429) return { kind: 'error', message: 'Too many attempts. Please wait a minute and try again.' }
         const data = await res.json().catch(() => null)
-        if (res.ok && data && data.received === true) return { kind: 'received' }
+        if (res.ok && data && data.received === true) return { kind: 'received', code: typeof data.code === 'string' ? data.code : undefined }
         return { kind: 'error', message: 'We could not confirm your application was received. Please try again.' }
       } catch {
         return { kind: 'error', message: 'Network problem. Your answers are still here, so you can try again.' }

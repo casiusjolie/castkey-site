@@ -7,6 +7,8 @@ export const nav = [
   { id: 'why', label: 'Why Castkey' },
   { id: 'listing', label: 'Your listing' },
   { id: 'creator-pay', label: 'Pay' },
+  { id: 'refer', label: 'Refer & earn' },
+  { id: 'agencies', label: 'Agencies' },
   { id: 'faq', label: 'FAQ' },
 ]
 
@@ -41,14 +43,16 @@ export const why = {
   title: 'Why Castkey.',
   lead: 'Brands come to you. You don’t have to pitch.',
   feature: {
-    tag: 'At launch',
-    k: 'Built-in discoverability',
-    v: 'Your listing is presented to vetted brands and advertisers as they search by category, look, voice and audience. No cold DMs, no chasing deals: the right brands find you and send a request.',
+    tag: 'A marketplace, with a team',
+    k: 'Brands find you. Our team helps.',
+    v: 'Castkey is a marketplace. Your listing is shown to vetted brands and advertisers as they search by category, look, voice and audience, so the right ones find you and send a request. No manager finding you AI deals? Our in-house team brings you opportunities and guides you through each request, from pricing to what to accept.',
   },
   reasons: [
     { k: 'Paid without another shoot', v: 'Your reviewed pack does the work. Each accepted request is a monthly payment, not a one-off job.' },
     { k: 'Protected by design', v: 'Verified profiles only, and your rules attached to every license.' },
-    { k: 'Priced by you', v: 'Set your monthly fee and charge a premium for exclusivity. Castkey keeps 20%, you keep 80%.' },
+    { k: 'No manager needed', v: 'Our team finds AI deals for you and walks you through every request. Already have a manager? Their split is built in.' },
+    { k: 'Talk to brands in the app', v: 'Requests, counter-offers and questions all happen in Castkey’s inbox, so terms stay on record and your number stays private.' },
+    { k: 'Priced by you', v: 'Set your monthly fee and charge a premium for exclusivity. You keep 80% of every payment.' },
   ],
 }
 
@@ -75,12 +79,61 @@ export const everyone = {
     {
       who: 'Partners',
       line: 'Earn for the talent you bring.',
-      points: ['Managers, agencies and scouts can apply', '5% of each referred creator’s license revenue', 'For their first 12 months, paid monthly', 'Paid by Castkey, never taken from the creator'],
+      points: ['Anyone who refers a creator can earn', '5% of what each referred creator earns', 'Up to $10,000 per creator you refer', 'Paid by Castkey, never taken from the creator'],
       cta: 'Become a partner',
       action: 'partner',
     },
   ],
   note: 'Earnings depend on demand and the terms each side agrees. Nothing here is a guarantee of income.',
+}
+
+// One rule everywhere: a referrer earns 5% of what each creator they refer earns, once that creator
+// is approved and brands pay, up to $10,000 per referred creator. It comes out of Castkey's 20%.
+export const referral = {
+  headline: 'Refer creators and earn up to $10,000.',
+  short: 'Earn 5% of what every creator you refer makes, up to $10,000 each.',
+  body: 'When someone you invite is approved and starts earning, you get 5% of their earnings, up to $10,000 per creator. It’s paid from Castkey’s share, so the creator still keeps their full 80%.',
+  rules: [
+    'Starts once the creator you invited is approved and a brand has paid them.',
+    'Paid monthly, after brands pay. Capped at $10,000 per creator you refer.',
+    'Comes from Castkey’s 20%. The creator’s 80% is never touched.',
+    'Tell people you earn a reward when you share your link. No referring yourself.',
+  ],
+  note: 'Referral rewards start when payouts open. Terms may be updated before launch; we’ll confirm the final terms before anyone earns.',
+}
+
+export const ecosystem = {
+  eyebrow: 'How the money moves',
+  title: 'Three people get paid on every deal.',
+  lead: 'Every license has a brand paying, a creator earning, and the person who brought that creator in collecting a share, for as long as the creator keeps earning (up to $10,000).',
+  example: 1000,
+  people: [
+    { k: 'The brand', role: 'Pays', amount: 1000, v: 'Subscribes to license a verified creator’s face and voice for its AI content, inside the creator’s rules.', tone: 'ice' },
+    { k: 'The creator', role: 'Keeps 80%', amount: 800, v: 'Approves the brand, sets the price, and is paid every month the license runs.', tone: 'coral' },
+    { k: 'The referrer', role: 'Earns 5%', amount: 50, v: 'Whoever invited the creator: another creator, a manager or a friend. Paid from Castkey’s share, up to $10,000 per creator.', tone: 'paper' },
+  ],
+  castkey: { k: 'Castkey', amount: 150, v: 'Runs the marketplace, the team that finds deals, verification and payments. 15% when a referrer is paid, 20% when not.' },
+  note: 'Have a manager or agency? Their split comes out of the creator’s 80% at the rate you agree, paid automatically. Example: one $1,000 monthly license; prices are set by each creator, and figures are illustrative, not an estimate of earnings.',
+}
+
+export const agencies = {
+  eyebrow: 'For agencies and managers',
+  title: 'Bring your whole roster.',
+  lead: 'Agencies and managers onboard every creator they represent in one go, run their deals from one place, and get paid two ways.',
+  points: [
+    { k: 'Upload your roster', v: 'Send us your roster and we onboard every creator together, with verification and listings set up for you. Built for large rosters.' },
+    { k: 'Manage it in one place', v: 'See every request across your creators, accept, counter or decline on their behalf with their permission, and track what each license earns.' },
+    { k: 'Your split, built in', v: 'Set your management commission per creator. It’s paid to you automatically every month, before the creator’s share lands. No invoicing, no chasing.' },
+    { k: 'Plus 5% for bringing them', v: 'Every creator you onboard also earns you the referral reward: 5% of what they make, up to $10,000 each, paid from Castkey’s share.' },
+  ],
+  example: 'Example: a brand pays $1,000. The creator’s 80% is $800; with a 20% management split, $160 goes to the agency and $640 to the creator. The agency’s $50 referral reward comes from Castkey’s share.',
+  cta: 'Talk to us about your roster',
+  note: 'Roster onboarding, the management dashboard and automatic splits are being built for launch. Tell us about your roster and we’ll set you up first.',
+}
+
+export const messaging = {
+  k: 'Talk to brands in the app',
+  v: 'Every request, counter-offer and question happens in Castkey’s inbox, with your manager or our team looped in if you want. Terms stay on record, and you never have to hand out your number or email.',
 }
 
 // The example listing. Swap these fields for a real creator ONLY with their written consent
@@ -192,7 +245,7 @@ export const creatorPay = {
   lede: 'Brands ask. You decide. Brands pay monthly for usage.',
   flow: [
     { k: 'A brand sends a usage request', v: 'What they want to make, where it will run, for how long, and whether they want exclusivity.' },
-    { k: 'You review and verify', v: 'Accept, adjust the terms, or decline. Only you can say yes for your face.' },
+    { k: 'You review and reply', v: 'Accept, counter, or decline, and message the brand inside Castkey if you have questions. Only you (or your manager, with your permission) can say yes for your face.' },
     { k: 'The brand subscribes', v: 'The subscription includes your reviewed training pack: photos, talking videos and voice notes. You’re paid every month it’s active, minus Castkey’s 20%.' },
   ],
   adsNote: 'Running you in paid ads? You also earn an agreed share of that ad spend.',
@@ -284,7 +337,7 @@ export const profiles: Profile[] = [
 export const faq = [
   {
     q: 'How do I get paid?',
-    a: 'A brand sends you a usage request. You accept it, adjust the terms, or decline. Once you accept, the brand starts a monthly subscription and you’re paid every month it’s active, minus Castkey’s 20% commission. Paid ads also earn you an agreed share of the ad spend.',
+    a: 'A brand sends you a usage request. You accept it, adjust the terms, or decline. Once you accept, the brand starts a monthly subscription and you keep 80% of every payment, every month it’s active. If someone referred you, their 5% comes out of Castkey’s share, not yours. Paid ads also earn you an agreed share of the ad spend.',
   },
   {
     q: 'Can I license only my voice or only my likeness?',
@@ -311,16 +364,28 @@ export const faq = [
     a: 'A license to use you inside your rules, plus your reviewed training pack: the photos, talking videos and voice notes you approved. Access lasts while the subscription is active, and deletion when it ends is set by the license.',
   },
   {
-    q: 'How do invites work?',
-    a: 'Tap “Invite a creator” and choose text or email. The message is already written, so you just pick who it goes to. After you apply, your invites carry your personal link, so we know who you brought in.',
+    q: 'How do referrals work?',
+    a: 'Tap “Invite a creator” and choose text or email; the message is already written. After you apply, your invites carry your personal link. When someone you invited is approved and starts earning, you earn 5% of their earnings, up to $10,000 per creator. It’s paid from Castkey’s share, so they still keep their full 80%. Please mention that you earn a reward when you share.',
   },
   {
     q: 'Can a brand get exclusivity?',
     a: 'Yes, if you offer it. A brand can ask for category exclusivity (no competing brands in that category) or full exclusivity (no other brands at all) for the license term. You set the premium on top of your monthly fee, and you accept, adjust or decline the request like any other. Castkey blocks requests that would conflict with a license you already hold.',
   },
   {
-    q: 'How does the partner program work?',
-    a: 'Approved managers, agencies and scouts earn 5% of each referred creator’s license revenue for that creator’s first 12 months, paid monthly after brands pay. It comes out of Castkey’s commission, never the creator’s share, and partners must disclose the relationship when they promote Castkey.',
+    q: 'I’m a manager or agency. Can I bring my roster?',
+    a: 'Yes. Agencies can upload their whole roster and manage it from one place, with their management split paid automatically. They also earn the referral reward on every creator they bring in: 5% of what each one earns, up to $10,000 per creator, paid from Castkey’s share. Tell us about your roster and we’ll set you up first.',
+  },
+  {
+    q: 'Do brands message me directly?',
+    a: 'Yes, inside Castkey. Requests, counter-offers and questions all happen in the in-app inbox, so you don’t have to share your number or email and every agreed term stays on record. Your manager or our team can be looped in.',
+  },
+  {
+    q: 'I have a manager. How do they get paid?',
+    a: 'Management splits are built in. Your manager sets their commission with you, and Castkey pays it to them automatically from your share each month, so nobody has to invoice anyone. Agencies can also upload and manage their whole roster.',
+  },
+  {
+    q: 'I don’t have a manager. Who finds me deals?',
+    a: 'Castkey is a marketplace, so brands can find and request you directly. On top of that, our in-house team looks for AI deals that fit you and guides you through each request: what to charge, what to accept and what to change.',
   },
   { q: 'Is adult content allowed?', a: 'Nudity and sexually explicit content are never allowed in anything licensed through Castkey. Vice brands such as alcohol, cannabis and betting can use Castkey, but they only reach creators who opt in to their category, and campaigns must follow the age and ad rules for that category.' },
   {

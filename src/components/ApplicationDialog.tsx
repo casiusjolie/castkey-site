@@ -17,6 +17,7 @@ function validUrl(v: string) {
 
 const emptyBrand: BrandFields = { name: '', email: '', company: '', website: '', brandType: '', intendedUse: '', adSpend: '', creatorSpend: '', paysUsage: '', aiTools: '' }
 const SPEND = ['$0', 'Under $5K', '$5K–$25K', '$25K–$100K', '$100K–$500K', 'Over $500K']
+const ROSTER = ['1–10', '11–50', '51–200', '200+']
 const AI_TOOLS = ['Higgsfield', 'Arcads', 'HeyGen', 'Creatify', 'MakeUGC', 'Synthesia', 'Runway', 'Other', 'None yet']
 const chip = (on: boolean) => `press min-h-11 rounded-full border px-4 text-sm font-medium transition-colors ${on ? 'border-coral bg-coral text-ink-950' : 'border-line text-sub hover:border-paper/40'}`
 const emptyCreator: CreatorFields = { name: '', email: '', profileUrl: '', followers: '', licensing: '', neverAllowed: '', note: '', invitedBy: '', inviteCode: '' }
@@ -94,6 +95,7 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
       if (!brand.company.trim()) e.company = 'Enter your company name.'
       if (!validUrl(brand.website.trim())) e.website = 'Enter a web address like company.com.'
       if (audience === 'brand' && !brand.brandType) e.brandType = 'Choose the option closest to you.'
+      if (audience === 'partner' && !brand.rosterSize) e.rosterSize = 'Choose a range.'
       if (audience === 'brand' && !brand.adSpend) e.adSpend = 'Choose a range. A rough guess is fine.'
       if (audience === 'brand' && !brand.creatorSpend) e.creatorSpend = 'Choose a range. A rough guess is fine.'
       if (!brand.intendedUse.trim()) e.intendedUse = audience === 'partner' ? 'Tell us briefly who you represent.' : 'Tell us briefly how you would use licensed likeness or voice.'
@@ -168,8 +170,8 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
           <div className="flex items-center gap-3">
             <Mark className="h-8 w-8 shrink-0 text-paper" />
             <div>
-              <h2 id="apply-title" className="font-display text-2xl leading-tight tracking-[-0.01em] sm:text-3xl">{isPartner ? 'Become a partner' : isBrand ? 'Get access to the world’s best faces.' : 'Apply as a creator'}</h2>
-              <p className="text-xs text-mute">{isPartner ? 'For managers, agencies and scouts' : isBrand ? 'Verified creators, licensed on clear terms. Request a demo for early access.' : 'Early access waitlist'}</p>
+              <h2 id="apply-title" className="font-display text-2xl leading-tight tracking-[-0.01em] sm:text-3xl">{isPartner ? 'Bring your roster to Castkey.' : isBrand ? 'Get access to the world’s best faces.' : 'Apply as a creator'}</h2>
+              <p className="text-xs text-mute">{isPartner ? 'For agencies, managers and scouts. Upload your roster, keep your split, earn 5% on every creator you bring.' : isBrand ? 'Verified creators, licensed on clear terms. Request a demo for early access.' : 'Early access waitlist'}</p>
             </div>
           </div>
           <button type="button" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line hover:bg-ink-800" aria-label="Close" onClick={() => ref.current?.close()}>
@@ -196,7 +198,7 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
                 <>
                   <p className="text-xs font-medium text-coral">Received</p>
                   <p className="mt-2 font-display text-3xl leading-tight">Thanks. Your {noun} was received.</p>
-                  <p className="mt-3 text-sm text-sub">{isPartner ? 'We review partners by hand and will be in touch with terms.' : isBrand ? 'We’ll be in touch to schedule a demo.' : 'We review creator applications by hand and will be in touch as onboarding opens.'}</p>
+                  <p className="mt-3 text-sm text-sub">{isPartner ? 'We’ll be in touch to plan your roster onboarding and set up your referral link.' : isBrand ? 'We’ll be in touch to schedule a demo.' : 'We review creator applications by hand and will be in touch as onboarding opens.'}</p>
                 </>
               )}
               <div className="mt-8 flex flex-wrap gap-3">
@@ -241,6 +243,23 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
                     )}
                   </Field>
                   )}
+                  {isPartner && (
+                    <>
+                      <fieldset aria-describedby={errors.rosterSize ? 'partner-rosterSize-err' : undefined}>
+                        <legend className="field-label">How many creators do you represent? <span className="font-normal text-mute">(required)</span></legend>
+                        <div id="partner-rosterSize" tabIndex={-1} className="flex flex-wrap gap-2" role="radiogroup">
+                          {ROSTER.map((v) => <button key={v} type="button" role="radio" aria-checked={brand.rosterSize === v} className={chip(brand.rosterSize === v)} onClick={() => setBrand({ ...brand, rosterSize: v })}>{v}</button>)}
+                        </div>
+                        {errors.rosterSize && <p id="partner-rosterSize-err" className="field-err">{errors.rosterSize}</p>}
+                      </fieldset>
+                      <fieldset>
+                        <legend className="field-label">Do you handle brand deals for them today?</legend>
+                        <div className="flex flex-wrap gap-2" role="radiogroup">
+                          {['Yes', 'Some of them', 'No'].map((v) => <button key={v} type="button" role="radio" aria-checked={brand.managesDeals === v} className={chip(brand.managesDeals === v)} onClick={() => setBrand({ ...brand, managesDeals: brand.managesDeals === v ? '' : v })}>{v}</button>)}
+                        </div>
+                      </fieldset>
+                    </>
+                  )}
                   {!isPartner && (
                     <>
                       <fieldset aria-describedby={errors.adSpend ? 'brand-adSpend-err' : undefined}>
@@ -277,7 +296,7 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
                       </fieldset>
                     </>
                   )}
-                  <Field id={`${prefix}-intendedUse`} label={isPartner ? 'Who do you represent?' : 'What would you use it for?'} required error={errors.intendedUse} hint={isPartner ? 'Roughly how many creators, and in which niches.' : 'A sentence or two is plenty, for example product explainers for our app. We’ll shape the demo around it.'}>
+                  <Field id={`${prefix}-intendedUse`} label={isPartner ? 'Tell us about your roster' : 'What would you use it for?'} required error={errors.intendedUse} hint={isPartner ? 'Niches, platforms, and a link to your roster or site if you have one.' : 'A sentence or two is plenty, for example product explainers for our app. We’ll shape the demo around it.'}>
                     {(a) => <textarea {...a} rows={3} maxLength={600} className="field resize-y" value={brand.intendedUse} onChange={(e) => setBrand({ ...brand, intendedUse: e.target.value })} />}
                   </Field>
                 </>
@@ -331,7 +350,7 @@ export function ApplicationDialog({ audience, onClose, onSwitch }: { audience: A
                 <button type="submit" className="btn-primary min-w-[200px]" disabled={status === 'sending'} aria-disabled={status === 'sending'}>
                   {status === 'sending' ? (
                     <><span className="h-4 w-4 animate-spin rounded-full border-2 border-ink-950/30 border-t-ink-950" aria-hidden="true" />Submitting…</>
-                  ) : status === 'error' ? 'Try again' : isPartner ? 'Apply to partner' : isBrand ? 'Request a demo' : 'Join the waitlist'}
+                  ) : status === 'error' ? 'Try again' : isPartner ? 'Send roster details' : isBrand ? 'Request a demo' : 'Join the waitlist'}
                 </button>
                 <button type="button" className="btn-ghost" onClick={() => ref.current?.close()}>Cancel</button>
               </div>
