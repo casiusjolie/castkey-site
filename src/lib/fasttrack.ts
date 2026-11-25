@@ -12,6 +12,7 @@ export const FAST_TRACKS: Record<string, FastTrack> = {
   agencies: { kind: 'dialog', audience: 'partner' },
   partners: { kind: 'dialog', audience: 'partner' },
   refer: { kind: 'section', id: 'refer' },
+  why: { kind: 'section', id: 'brands' },
   calls: { kind: 'section', id: 'calls' },
   earn: { kind: 'section', id: 'earn' },
   how: { kind: 'section', id: 'how' },

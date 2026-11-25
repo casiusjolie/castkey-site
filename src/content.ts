@@ -5,6 +5,7 @@ import casiusPhoto from './assets/casius.jpg'
 
 export const nav = [
   { id: 'how', label: 'How it works' },
+  { id: 'brands', label: 'For brands' },
   { id: 'calls', label: 'Open calls' },
   { id: 'earn', label: 'Earn' },
   { id: 'agencies', label: 'Agencies' },
@@ -39,6 +40,30 @@ export const pricing = {
   keep: 80, // the creator's share, % of each license (before any manager split)
   minLicense: 100, // lowest monthly license price, so fixed payment costs stay small
 } as const
+
+// Why brands pay. Every figure here is sourced; keep the links when editing.
+export const whyBrands = {
+  title: 'Why brands pay for real faces.',
+  lead: 'AI video ads are now standard. What brands can’t make with AI is a real person their customers trust, with the rights cleared. That’s what they license from you.',
+  stats: [
+    { n: '86%', k: 'of ad buyers use or plan to use AI to make video ads', src: 'IAB, 2025', url: 'https://www.iab.com/news/nearly-90-of-advertisers-will-use-gen-ai-to-build-video-ads/' },
+    { n: '39%', k: 'of digital video ads expected to be built or enhanced with AI in 2026, up from 22% in 2024', src: 'IAB via eMarketer', url: 'https://www.emarketer.com/content/nearly-40--of-video-ads-will-use-genai-by-2026--says-iab' },
+    { n: '$80B+', k: 'US digital video ad spend in 2026, growing faster than the total ad market', src: 'IAB, 2026', url: 'https://www.iab.com/news/u-s-digital-video-ad-spend-to-surpass-80b-in-2026/' },
+  ],
+  points: [
+    { k: 'Test every version', v: 'Hooks, scripts, settings and languages, made in their AI tools from one license. No shoot days or reshoots.' },
+    { k: 'A real person, not a fake one', v: 'Verified creators with a real audience, instead of AI people nobody recognizes.' },
+    { k: 'Rights in writing', v: 'Where the ads run, for how long and the creator’s rules, all in one license.' },
+  ],
+  example: {
+    title: 'Example: testing 20 ad versions',
+    ugc: { k: 'Filming 20 UGC videos', v: '≈ $3,080', note: '20 × $154, the average UGC payout in 2026' },
+    castkey: { k: 'One Castkey license', v: 'from $100/mo', note: 'every version within the license terms, plus the brand’s AI tool' },
+    src: 'Collabstr 2026 Influencer Marketing Report',
+    url: 'https://collabstr.com/2026-influencer-marketing-report',
+  },
+  cta: 'Brands: request a demo',
+}
 
 export const how = {
   title: 'How it works.',
@@ -130,6 +155,7 @@ export const invite = {
 
 export const faq = [
   { q: 'How do I get paid?', a: 'Brands subscribe monthly to your license. You keep 80% of every payment, and payouts are automatic every month. Licenses start at $100 a month.' },
+  { q: 'Why do brands pay for this?', a: 'Brands now make most ad versions with AI, but AI can’t give them a real, trusted person with the rights cleared. One license lets them test every hook, script and setting without paying for new shoots each time.' },
   { q: 'What are open calls and minimums?', a: 'Brands post open calls with what they’ll pay. Your inbound minimum is the least a brand can offer when they reach out to you. When you apply to an open call yourself, you can accept less if the deal is right.' },
   { q: 'Do I approve every brand?', a: 'Yes. You accept, counter or decline every request, and you can message the brand in the app first.' },
   { q: 'What do brands get?', a: 'Your training pack (photos, talking videos and voice recordings) plus a written license: where it runs, for how long, and your rules. Every profile needs a pack before it goes live.' },

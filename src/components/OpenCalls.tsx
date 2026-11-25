@@ -16,7 +16,7 @@ export function OpenCalls() {
       <div className="wrap" data-reveal>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-[680px]">
-            <p className="kicker"><b>04</b>Open calls</p>
+            <p className="kicker"><b>05</b>Open calls</p>
             <h2 id="calls-h" className="display-2 mt-4">{calls.title}</h2>
             <p className="lede mt-6">{calls.lead}</p>
           </div>

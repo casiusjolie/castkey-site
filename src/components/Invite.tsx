@@ -135,7 +135,7 @@ export function Invite() {
     <section id="invite" aria-labelledby="invite-h" className="band relative overflow-hidden">
       <div className="wrap relative">
         <div className="mx-auto max-w-[720px] text-center">
-          <p className="kicker"><b>02</b>Apply</p>
+          <p className="kicker"><b>03</b>Apply</p>
           <h2 id="invite-h" className="display-2 mt-3">{invite.title}</h2>
           <p className="lede mx-auto mt-6">{invite.body}</p>
         </div>

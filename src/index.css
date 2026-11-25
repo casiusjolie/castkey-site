@@ -4,6 +4,7 @@
 
 @layer base {
   html {
+    overflow-x: clip; /* decorative glows may extend past the edge; never scroll sideways */
     scroll-behavior: smooth;
     scroll-padding-top: 84px;
     -webkit-text-size-adjust: 100%;

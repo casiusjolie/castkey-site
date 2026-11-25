@@ -9,6 +9,7 @@ import { Invite } from './components/Invite'
 import { Listing } from './components/Listing'
 import { OpenCalls } from './components/OpenCalls'
 import { HowItWorks } from './components/HowItWorks'
+import { WhyBrands } from './components/WhyBrands'
 import { Earn, Refer } from './components/Earn'
 import { FAST_TRACKS, fastTrackKey } from './lib/fasttrack'
 import { useSpotlight } from './lib/motion'
@@ -99,6 +100,7 @@ export default function App() {
       <main id="main">
         <Hero />
         <HowItWorks />
+        <WhyBrands />
         <Invite />
         <Listing />
         <OpenCalls />

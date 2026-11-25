@@ -9,7 +9,7 @@ export function Agencies() {
       <div className="wrap" data-reveal>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           <div>
-            <p className="kicker"><b>06</b>Agencies</p>
+            <p className="kicker"><b>07</b>Agencies</p>
             <h2 id="ag-h" className="display-2 mt-3">{agencies.title}</h2>
             <p className="lede mt-6">{agencies.lead}</p>
             <button type="button" className="btn-primary press mt-8" onClick={() => open('partner')}>{agencies.cta}</button>

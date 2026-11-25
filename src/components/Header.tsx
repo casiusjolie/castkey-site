@@ -68,11 +68,6 @@ export function Header() {
                 </a>
               </li>
             ))}
-            <li>
-              <button type="button" className="press rounded-full px-3 py-2 text-sm font-medium text-sub transition-colors duration-300 hover:text-paper" onClick={() => open('brand')}>
-                For brands
-              </button>
-            </li>
           </ul>
         </nav>
         <div className="flex flex-1 items-center justify-end gap-2">
@@ -107,11 +102,6 @@ export function Header() {
                   </a>
                 </li>
               ))}
-              <li style={{ animationDelay: `${Math.min(nav.length * 60, 400)}ms` }}>
-                <button type="button" onClick={() => { setMenu(false); open('brand') }} className="py-3 text-left font-display text-4xl font-light tracking-tight text-sub">
-                  For brands
-                </button>
-              </li>
             </ul>
           </nav>
           <div className="mt-auto grid gap-3">
