@@ -4,8 +4,8 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/r/:code", "destination": "/invited/index.html" },
-    { "source": "/(apply|join|creators|brands|demo|agencies|partners|refer|calls|earn|how|faq)", "destination": "/index.html" }
+    { "source": "/r/:code", "destination": "/invited/" },
+    { "source": "/(apply|join|creators|brands|demo|agencies|partners|refer|calls|earn|how|faq)", "destination": "/" }
   ],
   "headers": [
     { "source": "/investors/(.*)", "headers": [ { "key": "X-Robots-Tag", "value": "noindex, nofollow" }, { "key": "Referrer-Policy", "value": "no-referrer" } ] }
