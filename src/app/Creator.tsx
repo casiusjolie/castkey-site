@@ -21,6 +21,15 @@ function Chips({ options, value, onChange, label }: { options: string[]; value: 
   )
 }
 
+function Toggle({ checked, onChange, label, help }: { checked: boolean; onChange: (v: boolean) => void; label: string; help: string }) {
+  return (
+    <label className="flex items-start justify-between gap-4 rounded-xl border border-line px-4 py-3">
+      <span><span className="block text-sm font-medium">{label}</span><span className="block text-xs text-sub">{help}</span></span>
+      <input type="checkbox" role="switch" className="mt-1 h-5 w-5 shrink-0 accent-[#E8774F]" checked={checked} onChange={(e) => onChange(e.target.checked)} />
+    </label>
+  )
+}
+
 function Section({ n, title, sub, children }: { n: number; title: string; sub?: string; children: React.ReactNode }) {
   return (
     <section className="border-t border-line pt-6 first:border-0 first:pt-0">
@@ -50,6 +59,8 @@ export function CreatorSetup({ uid, email, onDone }: { uid: string; email: strin
   const [ageMax, setAgeMax] = useState('')
   const [audience, setAudience] = useState(18)
   const [adult, setAdult] = useState(false)
+  const [approval, setApproval] = useState(false)
+  const [spendShare, setSpendShare] = useState(false)
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState('')
 
@@ -70,7 +81,7 @@ export function CreatorSetup({ uid, email, onDone }: { uid: string; email: strin
     const { error } = await supabase.from('creators').insert({
       id: uid, display_name: name.trim(), handle: h || null, social_url: social.trim() || null,
       followers_range: followers || null, licenses, inbound_minimum: Math.round(minimum), flexible_open_calls: flexible,
-      confirmed_adult: true, referred_by_code: ref || null,
+      confirmed_adult: true, referred_by_code: ref || null, require_approval: approval, ad_spend_share: spendShare,
     })
     if (error) { setBusy(false); return setErr(friendly(error)) }
     const r = await supabase.from('creator_rules').insert({ creator_id: uid, allowed, never, shown_age_min: lo, shown_age_max: hi, audience_min_age: audience })
@@ -130,6 +141,12 @@ export function CreatorSetup({ uid, email, onDone }: { uid: string; email: strin
           </div>
         </Section>
 
+        <Section n={4} title="Deal settings" sub="Both are off unless you switch them on. You can change them any time.">
+          <Toggle checked={approval} onChange={setApproval} label="Approve ads before they go live" help="Brands can test drafts freely, but nothing runs until you OK it." />
+          <Toggle checked={spendShare} onChange={setSpendShare} label={`Earn ${pricing.adSpendShare}% of ad spend`} help={`On top of your monthly price, you earn ${pricing.adSpendShare}% of what brands spend running ads with your likeness.`} />
+          <p className="text-xs text-mute">Castkey rules always apply: no adult content, ever, and nobody shown as under 18. Every license is signed by both sides and ends within 12 months unless renewed.</p>
+        </Section>
+
         <section className="border-t border-line pt-6">
           <label className="flex items-start gap-3">
             <input type="checkbox" className="mt-1 h-5 w-5 accent-[#E8774F]" checked={adult} onChange={(e) => setAdult(e.target.checked)} />
@@ -165,7 +182,7 @@ export function CreatorHome({ creator }: { creator: Creator; reload: () => Promi
       <p className="mt-2 text-sub">{s.v}</p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        {[['Monthly minimum', `$${creator.inbound_minimum.toLocaleString('en-US')}`], ['Licenses', creator.licenses.map((l) => l[0].toUpperCase() + l.slice(1)).join(' + ')], ['Open calls', creator.flexible_open_calls ? 'Flexible' : 'Minimum applies']].map(([k, v]) => (
+        {[['Monthly minimum', `$${creator.inbound_minimum.toLocaleString('en-US')}`], ['Licenses', creator.licenses.map((l) => l[0].toUpperCase() + l.slice(1)).join(' + ')], ['Open calls', creator.flexible_open_calls ? 'Flexible' : 'Minimum applies'], ['Ad approval', creator.require_approval ? 'Required' : 'Off'], ['Ad spend share', creator.ad_spend_share ? `${pricing.adSpendShare}% on` : 'Off']].map(([k, v]) => (
           <div key={k} className="lit rounded-2xl p-4"><p className="text-xs text-mute">{k}</p><p className="mt-1 font-display text-3xl tracking-[-0.02em]">{v}</p></div>
         ))}
       </div>

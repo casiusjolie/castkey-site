@@ -17,6 +17,7 @@ export const FAST_TRACKS: Record<string, FastTrack> = {
   earn: { kind: 'section', id: 'earn' },
   how: { kind: 'section', id: 'how' },
   faq: { kind: 'section', id: 'faq' },
+  standard: { kind: 'section', id: 'standard' },
 }
 
 /** The fast-track key in the current address, if any ("/apply", "/apply/", "#apply"). */

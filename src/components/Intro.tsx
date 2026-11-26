@@ -112,14 +112,14 @@ const SCENES: Scene[] = [
         <ul className="mt-10 flex max-w-2xl flex-wrap justify-center gap-3">
           {[
             ['Fashion', true], ['Product demos', true], ['Paid ads', true],
-            ['Shown as age 25–32', true], ['Politics', false], ['Gambling', false], ['Fake reviews', false],
+            ['Shown as age 25–32', true], ['I approve every ad', true], ['Politics', false], ['Gambling', false], ['Fake reviews', false],
           ].map(([k, ok], i) => (
             <li key={k as string} className={`iz rounded-full px-5 py-3 text-lg font-medium ${ok ? 'bg-ink-950 text-paper' : 'border border-ink-950/30 text-ink-950/70 line-through decoration-ink-950/40'}`} style={d(550 + i * 160)} {...(i === 2 ? { 'data-portal': '' } : {})}>
               {ok ? '✓ ' : '✕ '}{k as string}
             </li>
           ))}
         </ul>
-        <p className="iz mt-8 max-w-[44ch] rounded-2xl border border-ink-950/30 px-5 py-3 text-base font-medium text-ink-950" style={d(1700)}>Adult content using our creators is prohibited in all licensing deals, and nobody can be shown as under 18.</p>
+        <p className="iz mt-8 max-w-[44ch] rounded-2xl border border-ink-950/30 px-5 py-3 text-base font-medium text-ink-950" style={d(1700)}>No adult content, ever, for anyone. Nobody can be shown as under 18.</p>
       </div>
     ),
   },
@@ -130,7 +130,7 @@ const SCENES: Scene[] = [
         <div>
           <Eyebrow>Getting paid</Eyebrow>
           <h2 className="iz mt-3 font-display text-5xl leading-none tracking-[-0.03em] sm:text-6xl" style={d(250)}>Brands pay you every month.</h2>
-          <p className="iz mt-5 max-w-[36ch] text-lg text-sub" style={d(450)}>Brands pay monthly for as long as they use your likeness. You keep 80% of every payment.</p>
+          <p className="iz mt-5 max-w-[36ch] text-lg text-sub" style={d(450)}>Brands pay monthly for as long as they use your likeness. You keep 80%, and can earn 5% of their ad spend.</p>
         </div>
         <div className="iz rounded-3xl border border-line bg-ink-850 p-5" style={d(550)}>
           <div className="flex items-center justify-between text-sm">

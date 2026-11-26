@@ -16,6 +16,7 @@ export type Creator = {
   id: string; display_name: string; handle: string | null; bio: string | null; social_url: string | null
   followers_range: string | null; licenses: string[]; inbound_minimum: number; flexible_open_calls: boolean
   confirmed_adult: boolean; referred_by_code: string | null; status: ReviewStatus
+  require_approval: boolean; ad_spend_share: boolean
 }
 export type Brand = { id: string; company: string; website: string | null; ad_spend: string | null; status: ReviewStatus }
 

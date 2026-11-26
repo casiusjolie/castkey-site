@@ -13,7 +13,7 @@
       "destination": "/invited/"
     },
     {
-      "source": "/(apply|join|creators|brands|demo|agencies|partners|refer|calls|earn|how|faq)",
+      "source": "/(apply|join|creators|brands|demo|agencies|partners|refer|calls|earn|how|faq|standard)",
       "destination": "/"
     }
   ],

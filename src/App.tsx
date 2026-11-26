@@ -14,6 +14,7 @@ import { Earn, Refer } from './components/Earn'
 import { FAST_TRACKS, fastTrackKey } from './lib/fasttrack'
 import { useSpotlight } from './lib/motion'
 import { Agencies } from './components/Agencies'
+import { Standard } from './components/Standard'
 import { ApplicationDialog } from './components/ApplicationDialog'
 import { Wordmark } from './components/Logo'
 import { Intro } from './components/Intro'
@@ -35,6 +36,7 @@ function Footer({ open }: { open: (a: Audience) => void }) {
             {nav.map((n) => (
               <li key={n.id}><a className="hover:text-paper" href={`#${n.id}`}>{n.label}</a></li>
             ))}
+            <li><a className="hover:text-paper" href="#standard">The Castkey Standard</a></li>
             <li><button type="button" className="hover:text-paper" onClick={() => window.dispatchEvent(new Event('ck:intro'))}>Watch the intro</button></li>
             <li><button type="button" className="hover:text-paper" onClick={() => open('partner')}>Become a partner</button></li>
             <li><button type="button" className="hover:text-paper" onClick={() => open('brand')}>Brands: request an intro</button></li>
@@ -107,6 +109,7 @@ export default function App() {
         <Earn />
         <Agencies />
         <Refer />
+        <Standard />
         <FAQ />
         <Closing />
       </main>

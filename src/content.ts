@@ -39,6 +39,7 @@ export const pricing = {
   fee: 20, // Castkey's fee, % of each license
   keep: 80, // the creator's share, % of each license (before any manager split)
   minLicense: 100, // lowest monthly license price, so fixed payment costs stay small
+  adSpendShare: 5, // % of brand ad spend a creator earns when they switch it on (Castkey Standard)
 } as const
 
 // Why brands pay, in plain words. Keep the source link if the stat changes.
@@ -48,8 +49,8 @@ export const whyBrands = {
   lead: 'AI ads are quickly becoming normal. Castkey lets brands make them with real people their customers trust, instead of fake AI faces.',
   points: [
     { k: 'More ads, less money', v: 'Make and test dozens of ad versions without booking a new shoot every time.' },
-    { k: 'Real people, not fake ones', v: 'Verified creators with real audiences.' },
-    { k: 'Fully covered', v: 'Every license spells out where the ads run and for how long.' },
+    { k: 'Real people, real consent', v: 'Verified creators with real audiences, who agreed on camera.' },
+    { k: 'Fully covered', v: 'Every license is signed by both sides and says where the ads run and when it ends.' },
   ],
   compare: { a: 'Filming 20 creator videos', av: 'about $3,000', b: 'One Castkey license', bv: 'from $100 a month', src: 'Collabstr 2026 report', url: 'https://collabstr.com/2026-influencer-marketing-report' },
   cta: 'Brands: request an intro',
@@ -60,15 +61,15 @@ export const how = {
   steps: [
     { k: 'Brands find you', v: 'Set your monthly minimum. Brands that reach out must meet it. No manager? Our team brings you deals.' },
     { k: 'Or you find them', v: 'Browse open calls: brands post what they’ll pay. Apply to the ones you like, and go below your minimum if you want.' },
-    { k: 'You decide', v: 'Accept, counter or decline every request. Set your rules, even the age you can be shown as.' },
-    { k: 'You get paid monthly', v: 'Brands subscribe to your license. Payouts are automatic.' },
+    { k: 'You decide', v: 'Accept, counter or decline. Set your rules, even the age you can be shown as. Both sides sign before anything goes live.' },
+    { k: 'You get paid monthly', v: 'Brands subscribe to your license. Turn on ad spend share and earn 5% when your ads run.' },
   ],
 }
 
 export const earn = {
   title: 'How you get paid.',
   lead: 'A brand pays a monthly license. Castkey splits it automatically. Nobody invoices anybody.',
-  extras: 'Earn more with paid ads (a share of the ad spend) and brand exclusivity (a premium you set to stay off a brand’s competitors).',
+  extras: 'Earn more: turn on ad spend share to get 5% of what brands spend running ads with your likeness, or set a premium to be a brand’s only face in its category.',
 }
 
 // One rule everywhere: a referrer earns 5% of what each creator they refer earns, once that creator
@@ -119,7 +120,9 @@ export const exampleListing = {
   pack: 'Photos, talking videos and voice notes · reviewed by Castkey',
   packItems: ['Photos', 'Talking videos', 'Voice notes'],
   price: 'Set by Casius',
-  adShare: 'Agreed per license when used in paid ads',
+  adShare: 'On · 5% of ad spend',
+  approval: 'On · Casius approves ads before they go live',
+  term: 'Up to 12 months, renewable',
   exclusivity: 'Brand exclusivity available · premium set by Casius',
 }
 
@@ -144,17 +147,38 @@ export const invite = {
 }
 
 export const faq = [
-  { q: 'How do I get paid?', a: 'Brands subscribe monthly to your license. You keep 80% of every payment, and payouts are automatic every month. Licenses start at $100 a month.' },
+  { q: 'How do I get paid?', a: 'Brands subscribe monthly to your license. You keep 80% of every payment, and payouts are automatic every month. Licenses start at $100 a month. Turn on ad spend share and you also earn 5% of what brands spend running ads with your likeness.' },
   { q: 'Why do brands pay for this?', a: 'Almost every brand is starting to make ads with AI. They want real people their customers trust, not fake AI faces, and a license lets them make as many ad versions as they need without a new shoot each time.' },
   { q: 'What are open calls and minimums?', a: 'Brands post open calls with what they’ll pay. Your inbound minimum is the least a brand can offer when they reach out to you. When you apply to an open call yourself, you can accept less if the deal is right.' },
   { q: 'Do I approve every brand?', a: 'Yes. You accept, counter or decline every request, and you can message the brand in the app first.' },
+  { q: 'Can I approve ads before they go live?', a: 'Yes. Switch on approvals and every ad needs your OK before it can run. Brands can still test drafts freely. Leave it off and brands can run ads within your rules.' },
+  { q: 'What happens when a license ends?', a: 'Every license has an end date, up to 12 months, and can be renewed. When it ends without a renewal, the brand has 30 days to take its ads down.' },
+  { q: 'How is consent handled?', a: 'Every creator is verified and records a short consent video before going live. Both the brand and the creator sign the same Castkey terms on every deal.' },
+  { q: 'Who labels AI ads?', a: 'The brand. Every license requires following each platform’s AI labeling rules and the law wherever the ads run.' },
   { q: 'What do brands get?', a: 'Your training pack (photos, talking videos and voice recordings) plus a written license: where it runs, for how long, and your rules. Every profile needs a pack before it goes live.' },
   { q: 'Can my manager run my profile?', a: 'Yes, with the permissions you choose. Their split is paid automatically and can’t be more than 20% of your share.' },
   { q: 'How do referrals work?', a: 'Get your link and share it. When a creator you refer is approved and starts earning, you get 5% of every deal they do, up to $10,000 per creator, paid by Castkey.' },
   { q: 'Can I choose what age I’m shown as?', a: 'Yes. On any deal you can set the age range your AI likeness can be shown as, and the youngest audience the ads can be aimed at. No one is ever shown as under 18.' },
-  { q: 'Is adult content allowed?', a: 'No. Adult content using our creators is prohibited in all licensing deals. Alcohol, cannabis and betting brands only reach creators who opt in.' },
+  { q: 'Is adult content allowed?', a: 'No, never. This applies to every creator and every brand, and no setting can change it. Alcohol, cannabis and betting brands only reach creators who opt in.' },
   { q: 'Is Castkey live?', a: 'We’re in early access, onboarding the first creators and brands now. Applying is free.' },
 ]
+
+// The Castkey Standard: the rules every deal follows. Castkey sets these; creators can only add stricter rules.
+export const standard = {
+  title: 'The Castkey Standard.',
+  lead: 'AI likeness is new, so we wrote the rules. Every deal on Castkey follows them, for every creator and every brand.',
+  rules: [
+    { k: 'Verified consent', v: 'Every likeness comes from the real person, verified on camera.' },
+    { k: 'Signed every time', v: 'Brand and creator sign the same Castkey terms on every deal.' },
+    { k: 'Everything expires', v: 'Licenses run up to 12 months and can be renewed. Never forever.' },
+    { k: 'Creators set the price', v: 'Licenses start at $100 a month.' },
+    { k: 'Earn when ads run', v: 'Creators can turn on a 5% share of ad spend.' },
+    { k: 'Creators keep 80%', v: 'Paid out automatically every month.' },
+    { k: 'Approval if you want it', v: 'Creators can require their OK before any ad goes live.' },
+    { k: 'No adult content, ever', v: 'And no one is ever shown as under 18.' },
+    { k: 'AI is labeled', v: 'Wherever a platform or the law requires it.' },
+  ],
+}
 
 export const calls = {
   title: 'Brands post what they’ll pay. You pick.',

@@ -130,7 +130,7 @@ function Phone() {
                     <p className="mt-2 text-xs text-mute">Reviewed by Castkey before it can be licensed.</p>
                   </div>
                   <dl className="divide-y divide-line rounded-2xl bg-ink-850 px-3 text-xs">
-                    {[['Monthly license', L.price], ['Paid ads', 'Agreed share of spend'], ['Exclusivity', 'Category, premium set by Casius'], ['Usage', 'Reported monthly, audit rights']].map(([k, v]) => (
+                    {[['Monthly license', L.price], ['Ad spend share', L.adShare], ['Approval', L.approval], ['License length', L.term], ['Exclusivity', 'Category, premium set by Casius']].map(([k, v]) => (
                       <div key={k} className="flex justify-between gap-2 py-2"><dt className="text-mute">{k}</dt><dd className="text-right text-sub">{v}</dd></div>
                     ))}
                   </dl>
